@@ -40,7 +40,6 @@ Table: APPUSER
  USERSTATUS | int(10)      | NO   |     |         |         
  USERTYPEID | int(10)      | YES  |     |         |         
  MAPID      | varchar(500) | YES  |     |         |         
- QYID       | varchar(500) | YES  |     |         |         
  DELFLAG    | int(10)      | YES  |     | ((0))   |         
 ------------+--------------+------+-----+---------+---------
 
@@ -65,7 +64,6 @@ Table: APPUSERINFO
  INUSERID | varchar(50)       | YES  |     |         |         
  INDATE   | smalldatetime(16) | YES  |     |         |         
  DELFLAG  | int(10)           | YES  |     | ((0))   |         
- ENTITYID | int(10)           | YES  |     |         |         
 ----------+-------------------+------+-----+---------+---------
 
 Table: APPUSERTYPE
@@ -116,6 +114,19 @@ Table: customerinfo
  assessorId  | varchar(32)   | YES  |     |         |         
  flag        | varchar(10)   | YES  |     |         |         
 -------------+---------------+------+-----+---------+---------
+
+Table: payhist
+------------+-------------+------+-----+---------+---------
+ Field      | Type        | Null | Key | Default | Remarks 
+------------+-------------+------+-----+---------+---------
+ ID         | varchar(32) | NO   | PRI |         |         
+ userId     | varchar(32) | YES  |     |         |         
+ customName | varchar(50) | YES  |     |         |         
+ actualdate | varchar(50) | YES  |     |         |         
+ acualmoney | float(53)   | YES  |     |         |         
+ deflag     | varchar(10) | YES  |     |         |         
+ payId      | int(10)     | YES  |     |         |         
+------------+-------------+------+-----+---------+---------
 
 Table: work
 -----------+--------------+------+-----+---------+---------

@@ -27,6 +27,7 @@ public class _MappingKit {
 		arp.addMapping("APPUSERTYPE", "USERTYPEID", APPUSERTYPE.class);
 		arp.addMapping("cost", "ID", Cost.class);
 		arp.addMapping("customerinfo", "ID", Customerinfo.class);
+		arp.addMapping("payhist", "ID", Payhist.class);
 		arp.addMapping("work", "ID", Work.class);
 	}
 }
