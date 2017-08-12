@@ -13,19 +13,6 @@
     <link href="${ctx}/include/Scripts/H-ui/skin/default/skin.css" rel="stylesheet" />
     <link href="${ctx}/include/Scripts/H-ui/skin/default/skin.css" rel="stylesheet" />
     <link href="${ctx}/include/Scripts/H-ui/css/style.css" rel="stylesheet" />
-    <style>
-        .table tr td:nth-child(2){
-            text-align: center;
-            padding-left: 10px;
-        }
-        .table tr td:nth-child(5){
-            text-align: left;
-            padding-left: 10px;
-        }
-        .table tr td:nth-child(6){
-            width:8%;
-        }
-    </style>
 </head>
 <body>
 <div class="btn-primary change"  align="center" >
@@ -34,6 +21,7 @@
 <div class="pd-20">
     <div id="search" class="text-c pd">
         <form id="webform">
+            <input type="hidden" id="hUID" name="UID">
             客户姓名：<input type="text" class="input-text" style="width: 200px" placeholder="关键字" id="txtcustomName" name="customName" />
             &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary radius" id="btnSearch"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
             &nbsp;&nbsp;
@@ -102,6 +90,9 @@
     }
     function Btns(data) {
         var btns = ['<a onclick="openWin(\'${ctx}/tcust?pindex=showCustom&id=' + data.ID + '\',\'查看\',640, 500);\" class="btn-link">查看</a>'];
+        if(data.UID == "2"){
+            btns.push('')
+        }
         return btns.join('&nbsp; ');
     }
     function delAsk(FLID) {

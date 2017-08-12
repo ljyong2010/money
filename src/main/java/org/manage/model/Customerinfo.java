@@ -21,6 +21,7 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 
 	public Map<String,Object> getCustomList(Map<String,String> params,APPUSER appuser){
 		Map<String,Object> retMap = new HashMap<>();
+		int uid = appuser.getUSERTYPEID();
 		String sqlForm = "from customerinfo where flag = 0";
 		SqlBuilder sqlBuilder = new SqlBuilder(null);
 		sqlBuilder.addCondition("assessorId", SqlBuilder.Condition.EQ,appuser.getUSERID());
@@ -28,7 +29,7 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();
 		sqlForm+=sql;
-		Page<Record> recordPage = Pagination.JPaginate(params,"select *",sqlForm,pars);
+		Page<Record> recordPage = Pagination.JPaginate(params,"select *,"+uid+" as UID",sqlForm,pars);
 		retMap = Pager.PageMap(params,recordPage);
 		return retMap;
 	}
