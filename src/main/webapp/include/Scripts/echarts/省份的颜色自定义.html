@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link href="/Scripts/H-ui/css/H-ui.min.css" rel="stylesheet" />
+    <link href="/Scripts/H-ui/css/H-ui.admin.css" rel="stylesheet" />
+    <link href="/Scripts/H-ui/css/H-ui.admin.index.css" rel="stylesheet" />
+    <link href="/Scripts/H-ui/lib/Hui-iconfont/iconfont.css" rel="stylesheet" />
+    <link href="/Scripts/H-ui/skin/blue/skin.css" rel="stylesheet" />
+    <link href="/Scripts/H-ui/css/style.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.7.2.min.js"></script>
+    <script src="/Scripts/H-ui/lib/layer/layer.js"></script>
+    <script src="/Scripts/Common.js"></script>
+    <script src="/Scripts/echarts/echarts.min3.2.1.js"></script>
+    <script src="/Scripts/echarts/skin/macarons.js"></script>
+
+    <script src="/Scripts/echarts/myECharts.js"></script>
+    <script src="/Scripts/echarts/myEChartsMap.js"></script>
+
+    <script type="text/javascript">
+        var dom = document.getElementById("container");
+        $.get("/Scripts/echarts/map/1301.json", function (jsonData) {
+            echarts.registerMap('area', jsonData);
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            var geoCoordMap = {
+                "鹰手营子镇": [117.662430, 40.546407],
+                "桥西区": [114.461154, 38.004043],
+                "正定县": [114.570941, 38.146445]
+            };
+
+            var convertData = function (data) {
+                var res = [];
+                for (var i = 0; i < data.length; i++) {
+                    var geoCoord = geoCoordMap[data[i].name];
+                    if (geoCoord) {
+                        res.push({
+                            name: data[i].name,
+                            value: geoCoord.concat(data[i].value)
+                        });
+                    }
+                }
+                return res;
+            };
+
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function (params) {
+                        return params.name + ' : ' + params.value[2];
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    y: 'bottom',
+                    x: 'right',
+                    data: ['pm2.5']
+                },
+                visualMap: {
+                    min: 0,
+                    max: 200,
+                    calculable: true,
+                    inRange: {
+                        color: ['#50a3ba', '#eac736', '#d94e5d']
+                    }
+                },
+                geo: {
+                    map: 'area',
+                    label: {
+                        emphasis: {
+                            show: false
+                        }
+                    },
+                    itemStyle: {
+                        emphasis: {
+                            areaColor: '#2a333d'
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: 'pm2.5',
+                        type: 'scatter',
+                        coordinateSystem: 'geo',
+                        data: convertData([
+                            { name: "鹰手营子镇", value: 9 },
+                            { name: "桥西区", value: 20 },
+                            { name: "正定县", value: 80 }
+                        ]),
+                        symbolSize: 12,
+                        label: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                show: false
+                            }
+                        },
+                        itemStyle: {
+                            emphasis: {
+                                borderColor: '#fff',
+                                borderWidth: 1
+                            }
+                        }
+                    }
+                ]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="container" style="height: 100%"></div>
+</body>
+</html>

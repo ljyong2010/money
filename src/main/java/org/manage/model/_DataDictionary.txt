@@ -1,0 +1,132 @@
+Table: APPMENU
+----------+------------------------+------+-----+---------+---------
+ Field    | Type                   | Null | Key | Default | Remarks 
+----------+------------------------+------+-----+---------+---------
+ MENUID   | numeric() identity(18) | NO   | PRI |         |         
+ MENUNAME | nvarchar(50)           | NO   |     |         |         
+ PARENTID | numeric(18)            | NO   |     |         |         
+ MENUURL  | varchar(200)           | NO   |     |         |         
+ MENUICON | varchar(50)            | YES  |     |         |         
+ MENUSORT | float(53)              | NO   |     |         |         
+ ISHIDE   | int(10)                | NO   |     | ((0))   |         
+ DELFLAG  | int(10)                | NO   |     | ((0))   |         
+----------+------------------------+------+-----+---------+---------
+
+Table: APPROLE
+----------+------------------------+------+-----+---------+---------
+ Field    | Type                   | Null | Key | Default | Remarks 
+----------+------------------------+------+-----+---------+---------
+ ROLEID   | numeric() identity(18) | NO   | PRI |         |         
+ ROLENAME | varchar(50)            | NO   |     |         |         
+ DELFLAG  | int(10)                | NO   |     | ((0))   |         
+----------+------------------------+------+-----+---------+---------
+
+Table: APPROLE_MENU
+--------+-------------+------+-----+---------+---------
+ Field  | Type        | Null | Key | Default | Remarks 
+--------+-------------+------+-----+---------+---------
+ ROLEID | numeric(18) | NO   | PRI |         |         
+ MENUID | numeric(18) | NO   | PRI |         |         
+--------+-------------+------+-----+---------+---------
+
+Table: APPUSER
+------------+--------------+------+-----+---------+---------
+ Field      | Type         | Null | Key | Default | Remarks 
+------------+--------------+------+-----+---------+---------
+ USERID     | varchar(500) | NO   | PRI |         |         
+ LOGINNAME  | varchar(500) | NO   |     |         |         
+ REALNAME   | varchar(200) | YES  |     |         |         
+ PASSWORD   | varchar(500) | NO   |     |         |         
+ USERSTATUS | int(10)      | NO   |     |         |         
+ USERTYPEID | int(10)      | YES  |     |         |         
+ MAPID      | varchar(500) | YES  |     |         |         
+ QYID       | varchar(500) | YES  |     |         |         
+ DELFLAG    | int(10)      | YES  |     | ((0))   |         
+------------+--------------+------+-----+---------+---------
+
+Table: APPUSER_ROLE
+--------+-------------+------+-----+---------+---------
+ Field  | Type        | Null | Key | Default | Remarks 
+--------+-------------+------+-----+---------+---------
+ USERID | varchar(50) | NO   | PRI |         |         
+ ROLEID | numeric(18) | NO   | PRI |         |         
+--------+-------------+------+-----+---------+---------
+
+Table: APPUSERINFO
+----------+-------------------+------+-----+---------+---------
+ Field    | Type              | Null | Key | Default | Remarks 
+----------+-------------------+------+-----+---------+---------
+ USERID   | varchar(50)       | NO   | PRI |         |         
+ NAME     | varchar(200)      | YES  |     |         |         
+ SEX      | int(10)           | YES  |     |         |         
+ ADDRESS  | varchar(200)      | YES  |     |         |         
+ TEL      | varchar(50)       | YES  |     |         |         
+ EMAIL    | varchar(50)       | YES  |     |         |         
+ INUSERID | varchar(50)       | YES  |     |         |         
+ INDATE   | smalldatetime(16) | YES  |     |         |         
+ DELFLAG  | int(10)           | YES  |     | ((0))   |         
+ ENTITYID | int(10)           | YES  |     |         |         
+----------+-------------------+------+-----+---------+---------
+
+Table: APPUSERTYPE
+--------------+-------------+------+-----+---------+---------
+ Field        | Type        | Null | Key | Default | Remarks 
+--------------+-------------+------+-----+---------+---------
+ USERTYPEID   | int(10)     | NO   | PRI |         |         
+ USERTYPENAME | varchar(50) | NO   |     |         |         
+ MAPTABLE     | varchar(50) | NO   |     |         |         
+ MAPFIELD     | varchar(50) | NO   |     |         |         
+--------------+-------------+------+-----+---------+---------
+
+Table: cost
+-------------+--------------+------+-----+---------+---------
+ Field       | Type         | Null | Key | Default | Remarks 
+-------------+--------------+------+-----+---------+---------
+ ID          | varchar(32)  | NO   | PRI |         |         
+ money       | float(53)    | YES  |     |         |         
+ costDetails | varchar(500) | YES  |     |         |         
+ person      | varchar(50)  | YES  |     |         |         
+ userId      | varchar(32)  | YES  |     |         |         
+ delflag     | int(10)      | YES  |     | ((0))   |         
+ date        | varchar(100) | YES  |     |         |         
+-------------+--------------+------+-----+---------+---------
+
+Table: customerinfo
+-------------+---------------+------+-----+---------+---------
+ Field       | Type          | Null | Key | Default | Remarks 
+-------------+---------------+------+-----+---------+---------
+ ID          | varchar(32)   | NO   | PRI |         |         
+ customName  | varchar(50)   | YES  |     |         |         
+ card        | varchar(30)   | YES  |     |         |         
+ address     | varchar(500)  | YES  |     |         |         
+ phone       | varchar(20)   | YES  |     |         |         
+ qq          | varchar(20)   | YES  |     |         |         
+ webcart     | varchar(50)   | YES  |     |         |         
+ borrowbalan | float(53)     | YES  |     |         |         
+ borrowdate  | varchar(50)   | YES  |     |         |         
+ replymoney  | float(53)     | YES  |     |         |         
+ replydate   | varchar(50)   | YES  |     |         |         
+ deposit     | float(53)     | YES  |     |         |         
+ platform    | varchar(50)   | YES  |     |         |         
+ agency      | varchar(50)   | YES  |     |         |         
+ remark      | varchar(2000) | YES  |     |         |         
+ profit      | float(53)     | YES  |     |         |         
+ actualdate  | varchar(50)   | YES  |     |         |         
+ acualmoney  | float(53)     | YES  |     |         |         
+ assessorId  | varchar(32)   | YES  |     |         |         
+ flag        | varchar(10)   | YES  |     |         |         
+-------------+---------------+------+-----+---------+---------
+
+Table: work
+-----------+--------------+------+-----+---------+---------
+ Field     | Type         | Null | Key | Default | Remarks 
+-----------+--------------+------+-----+---------+---------
+ ID        | varchar(32)  | NO   | PRI |         |         
+ employee  | varchar(50)  | YES  |     |         |         
+ salary    | float(53)    | YES  |     |         |         
+ startDate | varchar(100) | YES  |     |         |         
+ endDate   | varchar(100) | YES  |     |         |         
+ userId    | varchar(32)  | YES  |     |         |         
+ delflag   | int(10)      | YES  |     | ((0))   |         
+-----------+--------------+------+-----+---------+---------
+

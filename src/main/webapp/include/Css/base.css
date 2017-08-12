@@ -1,0 +1,21 @@
+@charset "utf-8";
+html { _background: url(j); } /*注意这里可以让IE6 下不会抖动！！*/
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, legend, input, textarea, p, th, td { margin: 0; padding: 0; }
+a, input, button, select, textarea { outline: none }
+img { border: 0; vertical-align: middle; }
+em { font-style: normal }
+textarea { resize: none; }
+body { font: 12px/1.5 \5FAE\8F6F\96C5\9ED1, Helvetica, Arial, sans-serif;  }
+html { overflow-x: hidden; zoom: 1; }
+a { text-decoration: none; }
+a:hover { text-decoration: underline }
+ol, ul { list-style: none }
+h1, h2, h3, h4, h5 { font-size: 14px; }
+input, label, select { vertical-align: middle; font: 100% Tahoma }
+.clearfix:before, .clearfix:after { content: "."; display: table; height: 0; font-size: 0; line-height: 0; visibility: hidden; }
+.clearfix:after { clear: both; }
+.clearfix { *zoom:1;}
+.fl { float: left; }
+.fr { float: right; }
+
+table,td,th{border-collapse:collapse;}

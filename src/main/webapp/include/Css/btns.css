@@ -1,0 +1,173 @@
+﻿@charset "utf-8";
+
+.pr { position:relative}
+.btn-box { position:absolute; right:-100px; top:0; width:98px; z-index:100; text-align:left}
+
+
+
+.btn-add { background: url(../img/btns.png) -158px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-jian { background: url(../img/btns.png) -192px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+
+
+.btn-shen1{background: url(../img/btns.png) 0px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-shen2{background: url(../img/btns.png) -32px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-shen3{background: url(../img/btns.png) -64px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-shen1s{background: url(../img/btns.png) -555px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-shen2s{background: url(../img/btns.png) -587px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-shen3s{background: url(../img/btns.png) -619px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+
+
+.btn-edit{background: url(../img/btns.png) -96px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-help{background: url(../img/btns.png) -128px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-zt-yellow{background: url(../img/btns.png) -220px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-zt-green{background: url(../img/btns.png) -252px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-zt-red{background: url(../img/btns.png) -284px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-zt-blue{background: url(../img/btns.png) -452px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+
+.btn-fj{background: url(../img/btns.png) -314px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-fj2{background: url(../img/btns.png) -656px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-fj3{background: url(../img/btns.png) -687px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-save{background: url(../img/btns.png) -424px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-tian{background: url(../img/btns.png) -484px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-dao{background: url(../img/btns.png) -517px 0px; display: inline-block; height: 24px; width: 24px; border:0 none;}
+.btn-sheny{background: url(../img/btns.png) -340px 0px; display: inline-block; height: 24px; width: 21px; border:0 none;}
+.btn-sheno{background: url(../img/btns.png) -362px 0px; display: inline-block; height: 24px; width: 21px; border:0 none;}
+.btn-shenr{background: url(../img/btns.png) -384px 0px; display: inline-block; height: 24px; width: 21px; border:0 none;}
+
+
+
+.btn-shen1:hover {background-position:0px -24px; }
+.btn-shen2:hover {background-position:-32px -24px; }
+.btn-shen3:hover {background-position:-64px -24px; }
+
+.btn-shen1s:hover {background-position:-555px -24px; }
+.btn-shen2s:hover {background-position:-587px -24px; }
+.btn-shen3s:hover {background-position:-619px -24px; }
+
+
+.btn-sheny:hover {background-position:-340px -21px; }
+.btn-sheno:hover {background-position:-362px -21px; }
+.btn-shenr:hover {background-position:-384px -21px; }
+
+
+.btn-edit:hover {background-position:-96px -24px; }
+.btn-add:hover { background-position: -158px -24px }
+.btn-jian:hover { background-position: -192px -24px }
+.btn-help:hover {background-position:-128px -24px; }
+.btn-zt-yellow:hover {background-position:-220px -24px; }
+.btn-zt-green:hover {background-position:-252px -24px; }
+.btn-zt-red:hover {background-position:-284px -24px; }
+.btn-zt-blue:hover {background-position:-452px -24px; }
+.btn-fj:hover { background-position:-314px -24px ; }
+.btn-fj2:hover { background-position:-656px -24px ; }
+.btn-fj3:hover { background-position:-687px -24px ; }
+.btn-save:hover {background-position:-424px -24px; }
+.btn-tian:hover {background-position:-484px -24px; }
+.btn-dao:hover {background-position:-517px -24px; }
+
+
+
+
+
+
+
+
+
+
+
+.btns,.btns5{ /*background: url(../img/btns.gif)*/; height: 25px; border:0 none; cursor:pointer;line-height:25px;
+
+
+background: rgb(248,253,255);
+background: -moz-linear-gradient(top,  rgba(248,253,255,1) 0%, rgba(235,244,253,1) 50%, rgba(203,230,247,1) 51%, rgba(214,233,248,1) 100%);
+background: -webkit-linear-gradient(top,  rgba(248,253,255,1) 0%,rgba(235,244,253,1) 50%,rgba(203,230,247,1) 51%,rgba(214,233,248,1) 100%);
+background: linear-gradient(to bottom,  rgba(248,253,255,1) 0%,rgba(235,244,253,1) 50%,rgba(203,230,247,1) 51%,rgba(214,233,248,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8fdff', endColorstr='#d6e9f8',GradientType=0 );
+
+
+
+
+
+
+border-radius:4px; border:solid 1px #72aad1;  padding:0 14px;
+
+
+}
+.btns:hover,.btns5:hover{ background-position:0 25px}
+
+.btns-back{ background: url(../img/btn-back.png); height: 28px; width: 78px; border:0 none; cursor:pointer;}
+
+
+.btns2{ background: url(../img/btn-bg.png); height: 37px; width: 126px; border: 0 none; font-size:16px; font-weight:bold; color:#333 }
+.btns2:hover{ background-position:0 37px; }
+.btns3{ background: url(../img/btn1.png); height: 32px; width: 113px; border: 0 none; font-size:14px; font-weight:bold; color:#fff}
+.btns3:hover{ background-position:0 32px}
+
+
+.btn1 {font-size: 16px;line-height: 32px;font-weight: bold;color: #FFF;background: url(../img/btn1.png);height: 32px;width: 113px;text-align: center;display: inline-block;}
+
+.uploadify:hover  .btn-fj { background: url(../img/btns.png) -314px -24px !important; }
+
+
+
+
+/*up-load*/
+
+/*去除jquery故有样式*/
+.uploadify-button-text{ width: 100%;line-height: 24px;bottom: 30px;position: absolute;text-indent: 0 !important;display: block;color: #888;text-shadow: 0 -1px 0 #FFF;padding-top: 24px;}
+.uploadify-button{border-radius: 0px !important; border-color:#CCC}
+/*去除jquery故有样式end*/
+
+/*
+.up-btn{border: none; width: 150px; height: 40px; background: #ebebeb url(../img/up-load.png) no-repeat center 30px;text-align:center; padding-top:90px; font-size:14px; color:#888; font-weight:bold;}
+.up-btn:hover{background: #ebebeb url(../img/up-load.png) no-repeat center 30px !important;}
+
+*/
+
+
+.up-box{ padding:20px; display:block;}
+.ups-box{ float: left; border: 1px solid #dedede; height: 150px; width: 150px; text-align: center; margin-right: 12px; position: relative; margin-bottom:10px; display:table;}
+.ups-box img{ width:150px; height:120px;}
+.ups-box p{ font-size:13px; height:30px; line-height:30px;}
+.ups-box .delete{ position: absolute; text-align: center; height: 12px; width: 12px; color: #FFF; background: #F00; top: 1px; right: 1px; z-index: 100; line-height: 12px; font-size: 10px; }
+.mgs { position:absolute;right:8px; top:8px; z-index:9999; display:none; padding:4px; border:1px solid #333; background:#fff; border:#333 1px solid; width:48%;}
+.mgs img{ width:auto; height:auto; width:100%;}
+
+
+.up-x{}
+.up-x { border: none; width: 150px; height: 150px; background: #ebebeb url(../img/up-load.png) no-repeat center 30px;}
+.up-x p{ text-align:center; padding-top:90px; font-size:14px; color:#888; font-weight:bold}
+
+/*上传附件 行*/
+.up-frame { width:99%; height:99%; margin:0 auto; border:0 none}
+.line-u { clear:both;  padding:8px 0;width:51%;}
+.line-u object {left:0;}
+.div_display {float:left}
+
+.line-u .uploadify-button {border:0 none;}
+.line-u div {float:left;}
+
+
+
+
+/*复选框*/
+.table1 i{ display: inline-block; border: #8e8f8f 1px solid; width: 11px; height: 11px; margin: 0 4px; background: url(../img/fx.gif); }
+.table1 i.on{ background-position:11px 0}
+
+
+/*多选*/
+.sl-e-multiple i { background: url(../img/search.ele.png) no-repeat 9999px 9999px; -webkit-transition: background-position .15s ease-in-out; -moz-transition: background-position .15s ease-in-out; transition: background-position .15s ease-in-out }
+
+
+
+.sl-e-multiple { display:inline-block;height: 23px; line-height: 23px; border: 1px solid #DDD; padding: 0 10px 0 18px; position: relative; background: #fff; color: #333 }
+.sl-e-multiple i { position: absolute; display: block; font-style: normal; left: 3px; top: 1px; width: 13px; height: 20px; background-position: 0 -63px }
+.sl-e-multiple:hover { text-decoration: none; color: #e4393c; border-color: #e4393c }
+.sl-e-multiple:hover i { background-position: 0 -84px }
+
+
+
+
+.btn-add2{ background: url(../img/add-btn2.png); height: 51px; width: 168px; display:inline-block }
+.btn-back{ background: url(../img/btn-back.gif); height: 21px; width: 58px; display:inline-block }
+

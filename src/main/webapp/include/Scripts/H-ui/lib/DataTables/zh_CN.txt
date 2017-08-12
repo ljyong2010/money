@@ -1,0 +1,18 @@
+{
+	"processing": "<div id='colorfulPulse'><span class='item-1'></span>  <span class='item-2'></span>  <span class='item-3'></span>  <span class='item-4'></span>  <span class='item-5'></span>  <span class='item-6'></span>  <span class='item-7'></span></div>数据加载中，请等待...",
+	"lengthMenu": "显示 _MENU_ 项结果",
+	"sZeroRecords": "没有检索到数据",
+	"zeroRecords": "没有检索到数据",
+	"info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+	"infoEmpty": "显示第 0 至 0 项结果，共 0 项",
+	"infoFiltered": "(由 _MAX_ 项结果过滤)",
+	"infoPostFix": "",
+	"search": "搜索:",
+	"url": "",
+	"paginate": {
+		"first":    "首页",
+		"previous": "上页",
+		"next":     "下页",
+		"last":     "末页"
+	}
+}

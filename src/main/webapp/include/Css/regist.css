@@ -1,0 +1,32 @@
+@charset "utf-8";
+body { background: #518aab }
+.zc-top { background: url(../images/top-bg1.jpg); height: 62px; }
+.layout{ width:940px; margin:auto}
+
+.zc-top .logo{ float: left; line-height: 60px; font-size: 28px; color: #FFF; text-shadow: 2px 2px 4px #1D4A69; padding: 0px 0px 0px 30px; }
+
+
+.center-box{ background: #fff; border: 1px solid #fff; position:relative; margin-top:44px ; overflow:hidden}
+.box-left{ position: absolute; left: 0; top: 0; bottom: 0; z-index: 100; background: #e3edf5; border: 1px solid #fff; width:197px; }
+.box-right{ float: right; width: 740px; border-left: 1px solid #bfcfdc; margin: 1px 0px; }
+
+.lo-box{ background: url(../images/xuan.png) no-repeat; height: 81px; width: 206px; position: absolute; left: 3px; top: 32px; }
+.lo-box .tx1{ padding-left: 32px;color: #FFF;font-size: 22px;padding-top: 2px;line-height: 44px;}
+.lo-box .tx2{ padding-left: 32px; color: #fff; }
+
+.linex{ clear:both; height:32px; line-height:32px;font-size:16px; padding:6px 0}
+.bxl{ float:left; width:180px; text-align:right; }
+.bxr{ float:left;}
+
+
+.red{ color:#F00; font-weight:bold}
+
+.btn-box{ clear: both; padding: 20px 0px 20px 180px; }
+.zc-btn{ background: url(../images/zc-btn.gif); height: 52px; width: 183px; line-height: 52px; font-weight: bold; color: #FFF; font-size: 24px; border-style: none;cursor:pointer }
+
+.txt-in{ border: 1px solid #a7b6c4; background: #f3f9fc; -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; width:300px; height:30px; line-height:30px; padding-left:8px }
+.txt-in1{ border: 1px solid #a7b6c4; background: #f3f9fc; -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; width:350px; height:30px; line-height:30px; padding-left:8px }
