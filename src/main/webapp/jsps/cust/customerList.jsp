@@ -93,9 +93,9 @@
                 { "data": "customName" },
                 { "data": "phone" },
                 { "data": "borrowbalan" },
-                { "data": null, "sClass": "text-c","mRender": function (data) { return data.borrowdate==null?"-":data.borrowdate.substring(0,10);} },
-                { "data": "replymoney" },
-                { "data": null, "sClass": "text-c","mRender": function (data) { return data.replydate==null?"-":data.replydate.substring(0,10);} },
+                { "data": null, "sClass": "text-c","sWidth": "80px","mRender": function (data) { return data.borrowdate==null?"-":data.borrowdate.substring(0,10);} },
+                { "data": "replymoney","sWidth": "60px" },
+                { "data": null, "sClass": "text-c","sWidth": "80px","mRender": function (data) { return data.replydate==null?"-":data.replydate.substring(0,10);} },
                 { "data": null, "sClass": "text-c", "sWidth": "80px", "mRender": function (data, type, full) { return Btns(data); } }
             ]
         });
@@ -105,7 +105,8 @@
         return btns.join('&nbsp; ');
     }
     function delAsk(FLID) {
-        layer.confirm("确认删除吗？", function () { ajaxPost("${ctx}/tcust/delete", { id:ID}, function (d) {
+        layer.confirm("确认删除吗？", function () {
+            ajaxPost("${ctx}/tcust/delete", { id:ID}, function (d) {
             if (d.code > 0) {
                 layer.msg("删除成功", { time: 300 }, function () {
                     oTable.fnDraw();
