@@ -169,4 +169,12 @@ public abstract class BaseCustomerinfo<M extends BaseCustomerinfo<M>> extends Mo
 		return get("flag");
 	}
 
+	public void setPayId(java.lang.String payId) {
+		set("payId", payId);
+	}
+
+	public java.lang.String getPayId() {
+		return get("payId");
+	}
+
 }

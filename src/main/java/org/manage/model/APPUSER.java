@@ -100,7 +100,6 @@ public class APPUSER extends BaseAPPUSER<APPUSER> {
 			appuser1.setUSERSTATUS(0);
 			appuser1.setUSERTYPEID(1);
 			appuser1.setMAPID(uuid);
-			appuser1.setQYID("");
 
 			Db.tx(new IAtom() {
 				@Override

@@ -112,7 +112,8 @@ Table: customerinfo
  actualdate  | varchar(50)   | YES  |     |         |         
  acualmoney  | float(53)     | YES  |     |         |         
  assessorId  | varchar(32)   | YES  |     |         |         
- flag        | varchar(10)   | YES  |     |         |         
+ flag        | varchar(10)   | YES  |     | ((0))   |         
+ payId       | varchar(10)   | YES  |     | ((0))   |         
 -------------+---------------+------+-----+---------+---------
 
 Table: payhist

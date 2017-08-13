@@ -5,7 +5,6 @@ import com.jfinal.core.Controller;
 import org.manage.common.interceptor.LoginInterceptor;
 import org.manage.model.APPUSER;
 import org.manage.model.AppuserRole;
-import org.manage.util.SECSha;
 
 import java.util.HashMap;
 
@@ -49,5 +48,16 @@ public class LoginController extends Controller {
     @Clear(LoginInterceptor.class)
     public void code(){
         renderCaptcha();
+    }
+    public void logout(){
+        removeSessionAttr("Appuser");
+        removeSessionAttr("Role");
+        redirect("/tlogin");
+    }
+    public void personInfo(){
+
+    }
+    public void changePassword(){
+
     }
 }

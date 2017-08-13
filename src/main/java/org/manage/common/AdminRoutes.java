@@ -16,5 +16,6 @@ public class AdminRoutes extends Routes{
         add("/tcust", CustomerController.class,"/cust");
         add("/twork", WorkController.class,"/work");
         add("/tcost",CostController.class,"/cost");
+        add("/assessor",AssessorController.class,"/assessor");
     }
 }

@@ -1,5 +1,6 @@
 package org.manage.model;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import org.manage.model.base.BaseCustomerinfo;
@@ -22,9 +23,12 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 	public Map<String,Object> getCustomList(Map<String,String> params,APPUSER appuser){
 		Map<String,Object> retMap = new HashMap<>();
 		int uid = appuser.getUSERTYPEID();
-		String sqlForm = "from customerinfo where flag = 0";
+		String sqlForm = "from customerinfo where flag = 0 and payId = 0";
 		SqlBuilder sqlBuilder = new SqlBuilder(null);
-		sqlBuilder.addCondition("assessorId", SqlBuilder.Condition.EQ,appuser.getUSERID());
+		if (uid != 2){
+			sqlBuilder.addCondition("assessorId", SqlBuilder.Condition.EQ,appuser.getUSERID());
+		}
+		sqlBuilder.addCondition("replydate", SqlBuilder.Condition.GE,DateUtil.getDateTimeFormat(new Date()));
 		sqlBuilder.addCondition("customName", SqlBuilder.Condition.RLIKE,params.get("customName"));
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();
@@ -34,20 +38,45 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		return retMap;
 	}
 	public Map<String,Object> getYqCustomList(Map<String,String> params,APPUSER appuser){
-		String sqlForm = "from customerinfo where flag = 0 ";
+		String sqlForm = "from customerinfo where flag = 0 and payId = 0 ";
+		int uid = appuser.getUSERTYPEID();
 		SqlBuilder sqlBuilder = new SqlBuilder(null);
 		sqlBuilder.addCondition("replydate", SqlBuilder.Condition.LT,DateUtil.getDateTimeFormat(new Date()));
-		sqlBuilder.addCondition("assessorId", SqlBuilder.Condition.EQ,appuser.getUSERID());
+		if (uid !=2){
+			sqlBuilder.addCondition("assessorId", SqlBuilder.Condition.EQ,appuser.getUSERID());
+		}
 		sqlBuilder.addCondition("customName", SqlBuilder.Condition.RLIKE,params.get("customName"));
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();
 		sqlForm+=sql;
-		Page<Record> recordPage = Pagination.JPaginate(params,"select *",sqlForm,pars);
+		Page<Record> recordPage = Pagination.JPaginate(params,"select *,"+uid+" as UID",sqlForm,pars);
 		Map<String,Object> retMap = Pager.PageMap(params,recordPage);
 		return retMap;
 	}
 	public Customerinfo getCustomerInfo(String id){
 		Customerinfo customerinfo = dao.findFirst("select * from customerinfo where ID=? AND flag=0",id);
 		return customerinfo;
+	}
+	public Map<String,Object> payFull(String id){
+		Map<String,Object> retMap = new HashMap<>();
+		if (Db.update("update customerinfo set payId=? where ID=?",1,id) > 0){
+			retMap.put("code",1);
+			retMap.put("msg","");
+		}else {
+			retMap.put("code",-1);
+			retMap.put("msg","pay money fail");
+		}
+		return retMap;
+	}
+	public Map<String,Object> deleteInfo(String id){
+		Map<String,Object> retMap = new HashMap<>();
+		if (Db.update("delete from customerinfo where ID=?",id) > 0){
+			retMap.put("code",1);
+			retMap.put("msg","");
+		}else {
+			retMap.put("code",-1);
+			retMap.put("msg","pay money fail");
+		}
+		return retMap;
 	}
 }

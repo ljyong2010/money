@@ -14,7 +14,7 @@
 <body>
 <div class="pd-20" deform>
     <form id="webform" action="${ctx}/tcust/saveCustomInfo" class="form form-horizontal" method="post">
-        <input type="hidden" id="hID" NAME="ID">
+        <input type="hidden" id="hID" NAME="ID" value="${param.get("USERID")}">
             <div class="row cl border-tg">
                 <label class="form-label col-xs-3">客户姓名：</label>
                 <div class="formControls col-xs-3">
@@ -88,7 +88,7 @@
                 </div>
             </div>
 
-            <%if (((org.manage.model.APPUSER)session.getAttribute("Appuser")).getUSERTYPEID()==1){%>
+            <%if (((org.manage.model.APPUSER)session.getAttribute("Appuser")).getUSERTYPEID()==2){%>
             <div class="row cl  border-tg">
                 <label class="form-label col-xs-3">利润：</label>
                 <div class="formControls col-xs-9">
@@ -102,7 +102,7 @@
                 </div>
                 <label class="form-label col-xs-3">实际还款日期：</label>
                 <div class="formControls col-xs-3">
-                    <input type="text" id="txtactualmoney" name="actualmoney" class="input-text " datatype="*" nullmsg="必须填写借款日期！" value="" onclick="laydate()"/>
+                    <input type="text" id="txtactualmoney" name="actualmoney" class="input-text " value="" onclick="laydate()"/>
                 </div>
             </div>
             <%}else {%>
@@ -119,7 +119,7 @@
                 </div>
                 <label class="form-label col-xs-3">实际还款日期：</label>
                 <div class="formControls col-xs-3">
-                    <input type="text" id="txtactualmoney" readonly="readonly" name="actualmoney" class="input-text " datatype="*" nullmsg="必须填写借款日期！" value="" onclick="laydate()"/>
+                    <input type="text" id="txtactualmoney" readonly="readonly" name="actualmoney" class="input-text " value="" onclick="laydate()"/>
                 </div>
             </div>
         <%}%>

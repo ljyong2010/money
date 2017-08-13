@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by Administrator on 2017-7-28.
@@ -236,6 +237,9 @@ public class JsonUtil {
             e.printStackTrace();
         }
         return map;
+    }
+    public static String getUUID(){
+        return UUID.randomUUID().toString().replaceAll("-","");
     }
     public static void main(String[] args){
         String json = "[{\"name\":\"UNIT_NAME\",\"value\":\"aa\"},{\"name\":\"JGDM\",\"value\":\"aa\"},{\"sEcho\":1,\"iColumns\":7,\"iDisplayStart\":0,\"iDisplayLength\":10}]";

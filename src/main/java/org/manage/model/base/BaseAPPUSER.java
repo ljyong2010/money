@@ -65,14 +65,6 @@ public abstract class BaseAPPUSER<M extends BaseAPPUSER<M>> extends Model<M> imp
 		return get("MAPID");
 	}
 
-	public void setQYID(java.lang.String QYID) {
-		set("QYID", QYID);
-	}
-
-	public java.lang.String getQYID() {
-		return get("QYID");
-	}
-
 	public void setDELFLAG(java.lang.Integer DELFLAG) {
 		set("DELFLAG", DELFLAG);
 	}

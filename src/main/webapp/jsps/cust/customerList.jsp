@@ -29,15 +29,10 @@
 
         </form>
     </div>
-    <%
-        int roleid=((org.manage.model.AppuserRole)session.getAttribute("Role")).getROLEID().intValue();
-        if(roleid==1 || roleid==2||roleid==6){ %>
     <div class="cl pd-5 bg-1 bk-gray mt-10">
         <span class="l"></span>
         <span class="r"><a id="btnNew" onclick="openWinFull('${ctx}/tcust?pindex=addcustomer','新增',640, 600);" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加</a></span>
     </div>
-    <%}else{%>
-    <%}%>
     <div class="cl">
         <table id="datalist" class="table table-border table-bordered table-bg table-hover mt-5"style="width: 100%;">
             <thead>
@@ -78,21 +73,21 @@
         oTable = $("#datalist").dataTable({
             "sAjaxSource": "${ctx}/tcust/customList",
             "columns": [
-                { "data": "customName" },
-                { "data": "phone" },
-                { "data": "borrowbalan" },
-                { "data": null, "sClass": "text-c","sWidth": "80px","mRender": function (data) { return data.borrowdate==null?"-":data.borrowdate.substring(0,10);} },
-                { "data": "replymoney","sWidth": "60px" },
-                { "data": null, "sClass": "text-c","sWidth": "80px","mRender": function (data) { return data.replydate==null?"-":data.replydate.substring(0,10);} },
+                { "data": "customName","sWidth": "150px" },
+                { "data": "phone","sWidth": "150px" },
+                { "data": "borrowbalan","sWidth": "80px" },
+                { "data": null, "sClass": "text-c","sWidth": "110px","mRender": function (data) { return data.borrowdate==null?"-":data.borrowdate.substring(0,10);} },
+                { "data": "replymoney","sWidth": "80px" },
+                { "data": null, "sClass": "text-c","sWidth": "110px","mRender": function (data) { return data.replydate==null?"-":data.replydate.substring(0,10);} },
                 { "data": null, "sClass": "text-c", "sWidth": "250px", "mRender": function (data, type, full) { return Btns(data); } }
             ]
         });
     }
     function Btns(data) {
-        var btns = ['<a onclick="openWin(\'${ctx}/tcust?pindex=addcustomer&id=' + data.ID + '\',\'查看\',640, 500);\" class="btn-link">查看</a>'];
+        var btns = ['<a onclick="openWinFull(\'${ctx}/tcust?pindex=showCustom&USERID=' + data.ID + '\',\'查看\',640, 600);\" class="btn-link">查看</a>'];
         if(data.UID == "2"){
-            btns.push('<a onclick="openWin(\'${ctx}/tcust?pindex=paymentInfo&USERID=' + data.ID + '\',\'还款跟踪\',640, 350);\" class="btn-link">还款跟踪</a>');
-            btns.push('<a onclick="openWin(\'${ctx}/tcust?pindex=addcustomer&USERID=' + data.ID + '\',\'修改信息\',640, 350);\" class="btn-link">修改</a>');
+            btns.push('<a onclick="openWinFull(\'${ctx}/tcust?pindex=paymentInfo&USERID=' + data.ID + '\',\'还款跟踪\',640, 600);\" class="btn-link">还款跟踪</a>');
+            btns.push('<a onclick="openWinFull(\'${ctx}/tcust?pindex=addcustomer&USERID=' + data.ID + '\',\'修改信息\',640, 600);\" class="btn-link">修改</a>');
             btns.push('<a href="javascript:paymentMoney(\'' + data.ID + '\');" class="btn-link">还清</a>')
         }
         return btns.join('&nbsp; ');
@@ -111,7 +106,7 @@
         });
     }
     function paymentMoney(ID) {
-        layer.confirm("确认重置密码？",function () {
+        layer.confirm("确认借款还清？",function () {
             ajaxPost("${ctx}/tcust/paymentMoney",{ID:ID},function (d) {
                 if(d.code > 0){
                     layer.msg("确定还清",{time:300},function () {

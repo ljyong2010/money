@@ -35,8 +35,8 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>&nbsp;<span>${Appuser.REALNAME}</span><b class="caret"></b></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a id="loginuserinfo" href="#"><i class="icon-user"></i>&nbsp; 个人信息</a></li>
-                    <li><a id="pwdchange" href="#"><i class="icon-edit"></i>&nbsp; 修改密码</a></li>
+                    <li><a id="loginuserinfo" href="${ctx}/tlogin/personInfo"><i class="icon-user"></i>&nbsp; 个人信息</a></li>
+                    <li><a id="pwdchange" href="${ctx}/tlogin/changePassword"><i class="icon-edit"></i>&nbsp; 修改密码</a></li>
                     <li class="divider"></li>
                     <li><a id="logout" href="${ctx}/tlogin/logout"><i class="icon-off"></i>&nbsp; 退出</a></li>
                 </ul>

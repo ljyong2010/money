@@ -81,12 +81,4 @@ public abstract class BaseAPPUSERINFO<M extends BaseAPPUSERINFO<M>> extends Mode
 		return get("DELFLAG");
 	}
 
-	public void setENTITYID(java.lang.Integer ENTITYID) {
-		set("ENTITYID", ENTITYID);
-	}
-
-	public java.lang.Integer getENTITYID() {
-		return get("ENTITYID");
-	}
-
 }
