@@ -45,7 +45,6 @@
         </div>
     </div>
 
-
     <script src="${ctx}/include/Scripts/jquery-1.7.2.min.js"></script>
     <script src="${ctx}/include/Scripts/H-ui/lib/layer/layer.js"></script>
     <script src="${ctx}/include/Scripts/H-ui/lib/My97DatePicker/WdatePicker.js"></script>

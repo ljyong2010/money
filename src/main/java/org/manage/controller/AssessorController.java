@@ -6,8 +6,9 @@ import org.manage.model.APPUSER;
 import java.util.List;
 
 public class AssessorController extends Controller {
+
     public void index(){
-        String index = getPara("pindex");
+        String index = this.getPara("pindex");
         render(index+".jsp");
     }
 
