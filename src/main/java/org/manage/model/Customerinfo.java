@@ -89,7 +89,7 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();
 		sqlForm+=sql;
-		Page<Record> page = Pagination.JPaginate(params,"select sum(a.borrowbalan) as LOANS,sum(a.acualmoney) as RECEMENOY,b.loginname",sqlForm+" group by b.loginname",pars);
+		Page<Record> page = Pagination.JPaginate(params,"select sum(a.borrowbalan) as LOANS,sum(a.acualmoney) as RECEMENOY,LOGINNAME",sqlForm+" group by b.loginname",pars);
 		Map<String,Object> retMap = Pager.PageMap(params,page);
 		return retMap;
 	}

@@ -86,8 +86,10 @@
             });
         }
         function GAIN(data) {
-            var ret = parseFloat(data.RECEMENOY)-parseFloat(data.LOANS);
-            return ret;
+            var a1 = parseFloat(data.RECEMENOY);
+            var a2 = parseFloat(data.LOANS);
+            alert(a1);
+            return (a1 - a2);
         }
     </script>
 </body>
