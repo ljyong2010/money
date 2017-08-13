@@ -32,4 +32,16 @@ public class CustomerController extends Controller {
     public void saveCustomInfo(){
 
     }
+    public void paymentMoney(){
+
+    }
+    public void GetCustomerInfo(){
+        Map<String,String> paramMap=JsonUtil.jToMap(this.getRequest());
+        String ID = null;
+        if (paramMap.containsKey("ID")){
+            ID=paramMap.get("ID");
+        }
+        Customerinfo customerinfo = Customerinfo.dao.getCustomerInfo(ID);
+        renderJson(customerinfo);
+    }
 }

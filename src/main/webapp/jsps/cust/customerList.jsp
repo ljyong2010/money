@@ -21,7 +21,7 @@
 <div class="pd-20">
     <div id="search" class="text-c pd">
         <form id="webform">
-            <input type="hidden" id="hUID" name="UID">
+            <input type="hidden" id="hUID" name="UID" >
             客户姓名：<input type="text" class="input-text" style="width: 200px" placeholder="关键字" id="txtcustomName" name="customName" />
             &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary radius" id="btnSearch"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
             &nbsp;&nbsp;
@@ -84,14 +84,16 @@
                 { "data": null, "sClass": "text-c","sWidth": "80px","mRender": function (data) { return data.borrowdate==null?"-":data.borrowdate.substring(0,10);} },
                 { "data": "replymoney","sWidth": "60px" },
                 { "data": null, "sClass": "text-c","sWidth": "80px","mRender": function (data) { return data.replydate==null?"-":data.replydate.substring(0,10);} },
-                { "data": null, "sClass": "text-c", "sWidth": "80px", "mRender": function (data, type, full) { return Btns(data); } }
+                { "data": null, "sClass": "text-c", "sWidth": "250px", "mRender": function (data, type, full) { return Btns(data); } }
             ]
         });
     }
     function Btns(data) {
-        var btns = ['<a onclick="openWin(\'${ctx}/tcust?pindex=showCustom&id=' + data.ID + '\',\'查看\',640, 500);\" class="btn-link">查看</a>'];
+        var btns = ['<a onclick="openWin(\'${ctx}/tcust?pindex=addcustomer&id=' + data.ID + '\',\'查看\',640, 500);\" class="btn-link">查看</a>'];
         if(data.UID == "2"){
-            btns.push('')
+            btns.push('<a onclick="openWin(\'${ctx}/tcust?pindex=paymentInfo&USERID=' + data.ID + '\',\'还款跟踪\',640, 350);\" class="btn-link">还款跟踪</a>');
+            btns.push('<a onclick="openWin(\'${ctx}/tcust?pindex=addcustomer&USERID=' + data.ID + '\',\'修改信息\',640, 350);\" class="btn-link">修改</a>');
+            btns.push('<a href="javascript:paymentMoney(\'' + data.ID + '\');" class="btn-link">还清</a>')
         }
         return btns.join('&nbsp; ');
     }
@@ -106,6 +108,19 @@
                 layer.alert("删除失败！" + d.msg);
             }
         })
+        });
+    }
+    function paymentMoney(ID) {
+        layer.confirm("确认重置密码？",function () {
+            ajaxPost("${ctx}/tcust/paymentMoney",{ID:ID},function (d) {
+                if(d.code > 0){
+                    layer.msg("确定还清",{time:300},function () {
+                        oTable.fnDraw();
+                    });
+                }else {
+                    layer.alert("还款失败！"+d.msg);
+                }
+            })
         });
     }
 </script>

@@ -14,7 +14,7 @@
 <body>
 <div class="pd-20" deform>
     <form id="webform" action="${ctx}/tcust/saveCustomInfo" class="form form-horizontal" method="post">
-        <input type="hidden" id="ID" NAME="ID">
+        <input type="hidden" id="hID" NAME="ID">
             <div class="row cl border-tg">
                 <label class="form-label col-xs-3">客户姓名：</label>
                 <div class="formControls col-xs-3">
@@ -146,6 +146,13 @@
 <script src="${ctx}/include/Scripts/laydate/laydate.js"></script>
 <script language="javascript" type="text/javascript">
     var wForm = null;
+    if ($("#hID").val()!=""){
+        ajaxPost("${ctx}/tcust/GetCustomerInfo", {
+            ID: $("#hID").val()
+        }, function (d) {
+            formAssign(d);
+        });
+    }
     $(function(){
         wForm = $("#webform").Validform();
         $("#btnSave").click(function () {

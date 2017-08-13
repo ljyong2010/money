@@ -148,7 +148,7 @@ public class AdminController extends Controller {
         renderJson(record);
     }
     public void APPUSERINFOList_e(){
-        Map<String,String> paramsHash=JsonUtil.paramHashfunc(this.getRequest());
+        Map<String,String> paramsHash=JsonUtil.jsonNameToMap(this.getRequest());
         Map<String,Object> retMap = APPUSERINFO.dao.getList_e(paramsHash);
         renderJson(retMap);
     }

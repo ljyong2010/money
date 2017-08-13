@@ -46,4 +46,8 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		Map<String,Object> retMap = Pager.PageMap(params,recordPage);
 		return retMap;
 	}
+	public Customerinfo getCustomerInfo(String id){
+		Customerinfo customerinfo = dao.findFirst("select * from customerinfo where ID=? AND flag=0",id);
+		return customerinfo;
+	}
 }
