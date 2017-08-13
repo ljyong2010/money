@@ -17,7 +17,8 @@ public class AssessorController extends Controller {
 
     public void userName(){
         List<APPUSER> list = APPUSER.dao.getLName();
-        renderJson(list);
+        setAttr("data",list);
+        renderJson();
     }
     public void assessorList(){
         Map<String,String> paramsHash= JsonUtil.jsonNameToMap(this.getRequest());

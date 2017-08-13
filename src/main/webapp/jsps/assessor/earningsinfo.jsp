@@ -88,7 +88,6 @@
         function GAIN(data) {
             var a1 = parseFloat(data.RECEMENOY);
             var a2 = parseFloat(data.LOANS);
-            alert(a1);
             return (a1 - a2);
         }
     </script>
