@@ -68,7 +68,7 @@
             ajaxPost("${ctx}/tassessor/userName", {}, function (d) {
                 $('<option value="">选择审核员</option>').appendTo($("#sUSERID"));
                 $.each(d.data, function (i, v) {
-                    $('<option value="' + v.USERID + '">' + v.LOGINNAME + '</option>').appendTo($("#sUSERTYPEID"));
+                    $('<option value="' + v.USERID + '">' + v.LOGINNAME + '</option>').appendTo($("#sUSERID"));
                 });
                 fnCallBack();
             });
