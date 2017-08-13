@@ -79,4 +79,18 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		}
 		return retMap;
 	}
+	public Map<String,Object> getAssload(Map<String,String> params){
+		/*select sum(a.borrowbalan) as b1,sum(a.acualmoney),b.loginname from customerinfo a left join appuser b on a.assessorId=b.userid group by a.assessorId,b.loginname;*/
+		String sqlForm = "from customerinfo a left join appuser b on a.assessorId=b.userid where flag = 0";
+		SqlBuilder sqlBuilder = new SqlBuilder(null);
+		sqlBuilder.addCondition("a","borrowdate", SqlBuilder.Condition.EQ,params.get("startDate"));
+		sqlBuilder.addCondition("a","borrowdate", SqlBuilder.Condition.LE,params.get("endDate"));
+		sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,params.get("USERID"));
+		String sql = sqlBuilder.build();
+		Object[] pars = sqlBuilder.paras();
+		sqlForm+=sql;
+		Page<Record> page = Pagination.JPaginate(params,"select sum(a.borrowbalan) as LOANS,sum(a.acualmoney) as RECEMENOY,b.loginname",sqlForm+" group by b.loginname",pars);
+		Map<String,Object> retMap = Pager.PageMap(params,page);
+		return retMap;
+	}
 }

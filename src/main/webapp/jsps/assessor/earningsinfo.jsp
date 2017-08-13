@@ -38,7 +38,7 @@
                     <th>放款金额</th>
                     <th>回款金额</th>
                     <th>利润</th>
-                    <th>操作</th>
+                  <%--  <th>操作</th>--%>
                 </tr>
                 </thead>
             </table>
@@ -62,7 +62,7 @@
             $("#btnRemove").click(function () {
                 $("#webform :input").not(":button, :submit, :reset, :hidden").val("").removeAttr("checked").remove("selected");
             });
-            load({});
+            load(bindData());
         });
         function load(fnCallBack) {
             ajaxPost("${ctx}/tassessor/userName", {}, function (d) {
@@ -72,6 +72,22 @@
                 });
                 fnCallBack();
             });
+        }
+        function bindData() {
+            oTable = $("#datalist").dataTable({
+                "sAjaxSource": "${ctx}/tassessor/assessorList",
+                "columns": [
+                    { "data": "LOGINNAME"},
+                    { "data": "LOANS" },
+                    { "data": "RECEMENOY" },
+                    { "data": null, "sClass": "text-c", "sWidth": "80px", "mRender": function (data, type, full) { return GAIN(data); } }
+                   /* { "data": null, "sClass": "text-c", "sWidth": "100px", "mRender": function (data, type, full) { return Btns(data); } }*/
+                ]
+            });
+        }
+        function GAIN(data) {
+            var ret = parseFloat(data.RECEMENOY)-parseFloat(data.LOANS);
+            return ret;
         }
     </script>
 </body>
