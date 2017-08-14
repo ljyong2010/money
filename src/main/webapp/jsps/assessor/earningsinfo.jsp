@@ -58,11 +58,11 @@
         $(function () {
             /*$("#search").hide();*/
             $("#btnChange").click(function () { $("#search").slideToggle();});
-            $("#btnSearch").click(function () { oTable.fnDraw(); });
+            $("#btnSearch").click(function () { bindData(); });
             $("#btnRemove").click(function () {
                 $("#webform :input").not(":button, :submit, :reset, :hidden").val("").removeAttr("checked").remove("selected");
             });
-            load(bindData());
+            load(bin());
         });
         function load(fnCallBack) {
             ajaxPost("${ctx}/tassessor/userName", {}, function (d) {
@@ -73,17 +73,24 @@
                 fnCallBack();
             });
         }
+        function bin() {
+        }
         function bindData() {
-            oTable = $("#datalist").dataTable({
-                "sAjaxSource": "${ctx}/tassessor/assessorList",
-                "columns": [
-                    { "data": "LOGINNAME"},
-                    { "data": "LOANS" },
-                    { "data": "RECEMENOY" },
-                    { "data": null, "sClass": "text-c", "sWidth": "80px", "mRender": function (data, type, full) { return GAIN(data); } }
-                   /* { "data": null, "sClass": "text-c", "sWidth": "100px", "mRender": function (data, type, full) { return Btns(data); } }*/
-                ]
-            });
+            if(oTable){
+                oTable.fnDraw();
+            }else {
+                oTable = $("#datalist").dataTable({
+                    "sAjaxSource": "${ctx}/tassessor/assessorList",
+                    "columns": [
+                        { "data": "LOGINNAME"},
+                        { "data": "LOANS" },
+                        { "data": "RECEMENOY" },
+                        { "data": null, "sClass": "text-c", "sWidth": "80px", "mRender": function (data, type, full) { return GAIN(data); } }
+                        /* { "data": null, "sClass": "text-c", "sWidth": "100px", "mRender": function (data, type, full) { return Btns(data); } }*/
+                    ]
+                });
+            }
+
         }
         function GAIN(data) {
             var a1 = parseFloat(data.RECEMENOY);

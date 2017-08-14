@@ -7,7 +7,7 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <title>客户信息</title>
+    <title>历史客户信息</title>
     <link href="${ctx}/include/Scripts/H-ui/css/H-ui.min.css" rel="stylesheet" />
 
     <link href="${ctx}/include/Scripts/H-ui/lib/Hui-iconfont/iconfont.css" rel="stylesheet" />
@@ -28,7 +28,7 @@
             -&nbsp;<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" onclick="laydate()" id="txtendDate" name="endDate" />
             &nbsp;&nbsp;
             <%int typeid = ((APPUSER)session.getAttribute("Appuser")).getUSERTYPEID();
-            if (typeid == 2){%>
+                if (typeid == 2){%>
             <select id="sassessorId" name="assessorId" class="select-box" style="width: 150px"></select>
             <%}else {%>
             <select id="sassessorId" name="assessorId" class="select-box" style="width: 150px" disabled="disabled"></select>
@@ -90,7 +90,7 @@
     }
     function bindData() {
         oTable = $("#datalist").dataTable({
-            "sAjaxSource": "${ctx}/tcust/customList",
+            "sAjaxSource": "${ctx}/tcust/customListHis",
             "columns": [
                 { "data": "customName","sWidth": "150px" },
                 { "data": "phone","sWidth": "150px" },
@@ -104,39 +104,9 @@
     }
     function Btns(data) {
         var btns = ['<a onclick="openWinFull(\'${ctx}/tcust?pindex=showCustom&USERID=' + data.ID + '\',\'查看\',640, 600);\" class="btn-link">查看</a>'];
-        if(data.UID == "2"){
-            btns.push('<a onclick="openWinFull(\'${ctx}/tcust?pindex=paymentInfo&USERID=' + data.ID + '\',\'还款跟踪\',640, 600);\" class="btn-link">还款跟踪</a>');
-            btns.push('<a onclick="openWinFull(\'${ctx}/tcust?pindex=addcustomer&USERID=' + data.ID + '\',\'修改信息\',640, 600);\" class="btn-link">修改</a>');
-            btns.push('<a href="javascript:paymentMoney(\'' + data.ID + '\');" class="btn-link">还清</a>')
-        }
         return btns.join('&nbsp; ');
-    }
-    function delAsk(FLID) {
-        layer.confirm("确认删除吗？", function () {
-            ajaxPost("${ctx}/tcust/delete", { id:ID}, function (d) {
-            if (d.code > 0) {
-                layer.msg("删除成功", { time: 300 }, function () {
-                    oTable.fnDraw();
-                });
-            } else {
-                layer.alert("删除失败！" + d.msg);
-            }
-        })
-        });
-    }
-    function paymentMoney(ID) {
-        layer.confirm("确认借款还清？",function () {
-            ajaxPost("${ctx}/tcust/paymentMoney",{ID:ID},function (d) {
-                if(d.code > 0){
-                    layer.msg("确定还清",{time:300},function () {
-                        oTable.fnDraw();
-                    });
-                }else {
-                    layer.alert("还款失败！"+d.msg);
-                }
-            })
-        });
     }
 </script>
 </body>
 </html>
+

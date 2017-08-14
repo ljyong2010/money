@@ -82,4 +82,7 @@ public class CustomerController extends Controller {
         Customerinfo customerinfo = Customerinfo.dao.getCustomerInfo(ID);
         renderJson(customerinfo);
     }
+    public void customListHis(){
+
+    }
 }

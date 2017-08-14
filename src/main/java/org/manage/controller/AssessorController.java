@@ -25,4 +25,14 @@ public class AssessorController extends Controller {
         Map<String,Object> retMap = Customerinfo.dao.getAssload(paramsHash);
         renderJson(retMap);
     }
+    public void overdueMenoy(){
+        Map<String,String> paramsHash= JsonUtil.jsonNameToMap(this.getRequest());
+        Map<String,Object> retMap = Customerinfo.dao.getOverdue(paramsHash);
+        renderJson(retMap);
+    }
+    public void overShowMenoy(){
+        Map<String,String> paramsHash= JsonUtil.jsonNameToMap(this.getRequest());
+        Map<String,Object> retMap = Customerinfo.dao.getOverShow(paramsHash);
+        renderJson(retMap);
+    }
 }

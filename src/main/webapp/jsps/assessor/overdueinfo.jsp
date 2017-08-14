@@ -1,4 +1,3 @@
-<%@ page import="org.manage.model.APPUSER" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -7,7 +6,7 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <title>客户信息</title>
+    <title>逾期客户信息</title>
     <link href="${ctx}/include/Scripts/H-ui/css/H-ui.min.css" rel="stylesheet" />
 
     <link href="${ctx}/include/Scripts/H-ui/lib/Hui-iconfont/iconfont.css" rel="stylesheet" />
@@ -24,24 +23,11 @@
         <form id="webform">
             <input type="hidden" id="hUID" name="UID" >
             客户姓名：<input type="text" class="input-text" style="width: 200px" placeholder="关键字" id="txtcustomName" name="customName" />
-            &nbsp;&nbsp;&nbsp;开始日期：<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" onclick="laydate()" id="txtstartDate" name="startDate" />
-            -&nbsp;<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" onclick="laydate()" id="txtendDate" name="endDate" />
-            &nbsp;&nbsp;
-            <%int typeid = ((APPUSER)session.getAttribute("Appuser")).getUSERTYPEID();
-            if (typeid == 2){%>
-            <select id="sassessorId" name="assessorId" class="select-box" style="width: 150px"></select>
-            <%}else {%>
-            <select id="sassessorId" name="assessorId" class="select-box" style="width: 150px" disabled="disabled"></select>
-            <%}%>
-            <button type="button" class="btn btn-primary radius" id="btnSearch"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+            &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary radius" id="btnSearch"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
             &nbsp;&nbsp;
             <button type="button" class="btn btn-primary radius" id="btnRemove" ><i class="Hui-iconfont">&#xe68f;</i> 清空</button>
 
         </form>
-    </div>
-    <div class="cl pd-5 bg-1 bk-gray mt-10">
-        <span class="l"></span>
-        <span class="r"><a id="btnNew" onclick="openWinFull('${ctx}/tcust?pindex=addcustomer','新增',640, 600);" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加</a></span>
     </div>
     <div class="cl">
         <table id="datalist" class="table table-border table-bordered table-bg table-hover mt-5"style="width: 100%;">
@@ -66,31 +52,22 @@
 <script src="${ctx}/include/Scripts/H-ui/lib/DataTables/jquery.dataTables.min.js"></script>
 <script src="${ctx}/include/Scripts/H-ui/lib/DataTables/jquery.dataTables.defaults.js"></script>
 <script src="${ctx}/include/Scripts/H-ui/js/H-ui.js"></script>
-<script src="${ctx}/include/Scripts/laydate/laydate.js"></script>
+
 <script src="${ctx}/include/Scripts/Common.js"></script>
 <script>
     var oTable = null;
     $(function () {
-        $("#search").hide();
+        /*$("#search").hide();*/
         $("#btnChange").click(function () { $("#search").slideToggle();});
         $("#btnSearch").click(function () { oTable.fnDraw(); });
         $("#btnRemove").click(function () {
             $("#webform :input").not(":button, :submit, :reset, :hidden").val("").removeAttr("checked").remove("selected");
         });
-        load(bindData());
+        bindData();
     });
-    function load(fnCallBack) {
-        ajaxPost("${ctx}/tassessor/userName", {}, function (d) {
-            $('<option value="">选择审核员</option>').appendTo($("#sassessorId"));
-            $.each(d.data, function (i, v) {
-                $('<option value="' + v.USERID + '">' + v.LOGINNAME + '</option>').appendTo($("#sassessorId"));
-            });
-            fnCallBack();
-        });
-    }
     function bindData() {
         oTable = $("#datalist").dataTable({
-            "sAjaxSource": "${ctx}/tcust/customList",
+            "sAjaxSource": "${ctx}/tcust/yqcustomList",
             "columns": [
                 { "data": "customName","sWidth": "150px" },
                 { "data": "phone","sWidth": "150px" },
@@ -104,38 +81,7 @@
     }
     function Btns(data) {
         var btns = ['<a onclick="openWinFull(\'${ctx}/tcust?pindex=showCustom&USERID=' + data.ID + '\',\'查看\',640, 600);\" class="btn-link">查看</a>'];
-        if(data.UID == "2"){
-            btns.push('<a onclick="openWinFull(\'${ctx}/tcust?pindex=paymentInfo&USERID=' + data.ID + '\',\'还款跟踪\',640, 600);\" class="btn-link">还款跟踪</a>');
-            btns.push('<a onclick="openWinFull(\'${ctx}/tcust?pindex=addcustomer&USERID=' + data.ID + '\',\'修改信息\',640, 600);\" class="btn-link">修改</a>');
-            btns.push('<a href="javascript:paymentMoney(\'' + data.ID + '\');" class="btn-link">还清</a>')
-        }
         return btns.join('&nbsp; ');
-    }
-    function delAsk(FLID) {
-        layer.confirm("确认删除吗？", function () {
-            ajaxPost("${ctx}/tcust/delete", { id:ID}, function (d) {
-            if (d.code > 0) {
-                layer.msg("删除成功", { time: 300 }, function () {
-                    oTable.fnDraw();
-                });
-            } else {
-                layer.alert("删除失败！" + d.msg);
-            }
-        })
-        });
-    }
-    function paymentMoney(ID) {
-        layer.confirm("确认借款还清？",function () {
-            ajaxPost("${ctx}/tcust/paymentMoney",{ID:ID},function (d) {
-                if(d.code > 0){
-                    layer.msg("确定还清",{time:300},function () {
-                        oTable.fnDraw();
-                    });
-                }else {
-                    layer.alert("还款失败！"+d.msg);
-                }
-            })
-        });
     }
 </script>
 </body>
