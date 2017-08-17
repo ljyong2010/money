@@ -41,7 +41,6 @@ public class CustomerController extends Controller {
         Map<String,String> params = JsonUtil.jsonNameToMap(this.getRequest());
         Map<String,Object> retMap = new HashMap<>();
         APPUSER appuser = getSessionAttr("Appuser");
-        String uid = params.get("ID");
         Customerinfo customerinfo = JsonUtil.mapToBean(params,Customerinfo.class);
         if (Strings.isNullOrEmpty(customerinfo.getID())){
             customerinfo.setID(JsonUtil.getUUID());
@@ -54,6 +53,21 @@ public class CustomerController extends Controller {
                 retMap.put("msg","save fail");
             }
         }else {
+            if (customerinfo.update()){
+                retMap.put("code",1);
+                retMap.put("msg","");
+            }else {
+                retMap.put("code",-1);
+                retMap.put("msg","save fail");
+            }
+        }
+        renderJson(retMap);
+    }
+    public void payMoneyInfo(){
+        Map<String,String> params = JsonUtil.jsonNameToMap(this.getRequest());
+        Map<String,Object> retMap = new HashMap<>();
+        Customerinfo customerinfo = JsonUtil.mapToBean(params,Customerinfo.class);
+        if (!Strings.isNullOrEmpty(customerinfo.getID())){
             if (customerinfo.update()){
                 retMap.put("code",1);
                 retMap.put("msg","");
@@ -83,6 +97,9 @@ public class CustomerController extends Controller {
         renderJson(customerinfo);
     }
     public void customListHis(){
-
+        APPUSER appuser = getSessionAttr("Appuser");
+        Map<String,String> paramsHash= JsonUtil.jsonNameToMap(this.getRequest());
+        Map<String,Object> retMap = Customerinfo.dao.getHisCust(paramsHash,appuser);
+        renderJson(retMap);
     }
 }

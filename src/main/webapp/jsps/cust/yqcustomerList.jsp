@@ -86,8 +86,8 @@
     function Btns(data) {
         var btns = ['<a onclick="openWinFull(\'${ctx}/tcust?pindex=showCustom&USERID=' + data.ID + '\',\'查看\',640, 600);\" class="btn-link">查看</a>'];
         if(data.UID == "2"){
-            btns.push('<a onclick="openWinFull(\'${ctx}/tcust?pindex=paymentInfo&USERID=' + data.ID + '\',\'还款跟踪\',640, 600);\" class="btn-link">还款跟踪</a>');
-            btns.push('<a href="javascript:paymentMoney(\'' + data.ID + '\');" class="btn-link">还清</a>')
+            btns.push('<a onclick="openWinFull(\'${ctx}/tcust?pindex=paymentInfo&USERID=' + data.ID + '\',\'还款\',640, 600);\" class="btn-link">还款</a>');
+            /*btns.push('<a href="javascript:paymentMoney(\'' + data.ID + '\');" class="btn-link">还清</a>')*/
         }
         return btns.join('&nbsp; ');
     }
@@ -100,19 +100,6 @@
                     });
                 } else {
                     layer.alert("删除失败！" + d.msg);
-                }
-            })
-        });
-    }
-    function paymentMoney(ID) {
-        layer.confirm("确认借款还清？",function () {
-            ajaxPost("${ctx}/tcust/paymentMoney",{ID:ID},function (d) {
-                if(d.code > 0){
-                    layer.msg("确定还清",{time:300},function () {
-                        oTable.fnDraw();
-                    });
-                }else {
-                    layer.alert("还款失败！"+d.msg);
                 }
             })
         });

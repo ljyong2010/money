@@ -100,20 +100,22 @@ Table: customerinfo
  phone       | varchar(20)   | YES  |     |         |         
  qq          | varchar(20)   | YES  |     |         |         
  webcart     | varchar(50)   | YES  |     |         |         
- borrowbalan | float(53)     | YES  |     |         |         
+ borrowbalan | float(53)     | YES  |     | ((0))   |         
  borrowdate  | varchar(50)   | YES  |     |         |         
- replymoney  | float(53)     | YES  |     |         |         
+ replymoney  | float(53)     | YES  |     | ((0))   |         
  replydate   | varchar(50)   | YES  |     |         |         
- deposit     | float(53)     | YES  |     |         |         
+ deposit     | float(53)     | YES  |     | ((0))   |         
  platform    | varchar(50)   | YES  |     |         |         
  agency      | varchar(50)   | YES  |     |         |         
  remark      | varchar(2000) | YES  |     |         |         
- profit      | float(53)     | YES  |     |         |         
+ profit      | float(53)     | YES  |     | ((0))   |         
  actualdate  | varchar(50)   | YES  |     |         |         
- acualmoney  | float(53)     | YES  |     |         |         
+ acualmoney  | float(53)     | YES  |     | ((0))   |         
  assessorId  | varchar(32)   | YES  |     |         |         
  flag        | varchar(10)   | YES  |     | ((0))   |         
  payId       | varchar(10)   | YES  |     | ((0))   |         
+ revfee      | float(53)     | YES  |     | ((0))   |         
+ overflag    | varchar(10)   | YES  |     | ((0))   |         
 -------------+---------------+------+-----+---------+---------
 
 Table: payhist

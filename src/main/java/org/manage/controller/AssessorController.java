@@ -35,4 +35,15 @@ public class AssessorController extends Controller {
         Map<String,Object> retMap = Customerinfo.dao.getOverShow(paramsHash);
         renderJson(retMap);
     }
+    public void salaryInfo(){
+        APPUSER appuser = getSessionAttr("Appuser");
+        Map<String,String> paramsHash = JsonUtil.jsonNameToMap(this.getRequest());
+        Map<String,Object> retMap = Customerinfo.dao.getSalary(paramsHash,appuser);
+        renderJson(retMap);
+    }
+    public void salaryShowMenoy(){
+        Map<String,String> paramsHash = JsonUtil.jsonNameToMap(this.getRequest());
+        Map<String,Object> retMap = Customerinfo.dao.salaryShow(paramsHash);
+        renderJson(retMap);
+    }
 }

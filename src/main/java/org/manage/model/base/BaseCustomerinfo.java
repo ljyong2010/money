@@ -177,4 +177,20 @@ public abstract class BaseCustomerinfo<M extends BaseCustomerinfo<M>> extends Mo
 		return get("payId");
 	}
 
+	public void setRevfee(java.lang.Double revfee) {
+		set("revfee", revfee);
+	}
+
+	public java.lang.Double getRevfee() {
+		return get("revfee");
+	}
+
+	public void setOverflag(java.lang.String overflag) {
+		set("overflag", overflag);
+	}
+
+	public java.lang.String getOverflag() {
+		return get("overflag");
+	}
+
 }

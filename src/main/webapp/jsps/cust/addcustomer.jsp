@@ -98,11 +98,11 @@
             <div class="row cl">
                 <label class="form-label col-xs-3">实际还款金额：</label>
                 <div class="formControls col-xs-3">
-                    <input type="text" id="txtactualdate" name="actualdate" class="input-text" style="width:100%">
+                    <input type="text" id="txtacualmoney" name="acualmoney" class="input-text" style="width:100%">
                 </div>
                 <label class="form-label col-xs-3">实际还款日期：</label>
                 <div class="formControls col-xs-3">
-                    <input type="text" id="txtactualmoney" name="actualmoney" class="input-text " value="" onclick="laydate()"/>
+                    <input type="text" id="txtactualdate" name="actualdate" class="input-text " value="" onclick="laydate()"/>
                 </div>
             </div>
             <%}else {%>
@@ -115,11 +115,11 @@
             <div class="row cl">
                 <label class="form-label col-xs-3">实际还款金额：</label>
                 <div class="formControls col-xs-3">
-                    <input type="text" id="txtactualdate" readonly="readonly" name="actualdate" class="input-text" style="width:100%">
+                    <input type="text" id="txtacualmoney" readonly="readonly" name="acualmoney" class="input-text" style="width:100%">
                 </div>
                 <label class="form-label col-xs-3">实际还款日期：</label>
                 <div class="formControls col-xs-3">
-                    <input type="text" id="txtactualmoney" readonly="readonly" name="actualmoney" class="input-text " value="" onclick="laydate()"/>
+                    <input type="text" id="txtactualdate" readonly="readonly" name="actualdate" class="input-text " value="" onclick="laydate()"/>
                 </div>
             </div>
         <%}%>
