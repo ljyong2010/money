@@ -6,146 +6,148 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <title></title>
-    <link href="${ctx}/include/Scripts/H-ui/css/H-ui.min.css" rel="stylesheet" />
-    <link href="${ctx}/include/Scripts/H-ui/lib/Hui-iconfont/iconfont.css" rel="stylesheet" />
-    <link href="${ctx}/include/Scripts/H-ui/skin/default/skin.css" rel="stylesheet" />
-    <link href="${ctx}/include/Scripts/H-ui/css/style.css" rel="stylesheet" />
+    <link href="${ctx}/include/Scripts/H-ui/css/H-ui.min.css" rel="stylesheet"/>
+    <link href="${ctx}/include/Scripts/H-ui/css/H-ui.admin.css" rel="stylesheet"/>
+    <link href="${ctx}/include/Scripts/H-ui/lib/Hui-iconfont/iconfont.css" rel="stylesheet"/>
+    <link href="${ctx}/include/Scripts/H-ui/skin/default/skin.css" rel="stylesheet"/>
+    <link href="${ctx}/include/Scripts/H-ui/css/style.css" rel="stylesheet"/>
 </head>
 <body>
-<div class="pd-20" deform>
-    <form id="webform" action="${ctx}/tcust/saveCustomInfo" class="form form-horizontal" method="post">
+<div class="pd-20">
+    <form id="webform" class="form form-horizontal" action="${ctx}/tcust/saveCustomInfo">
         <input type="hidden" id="hID" NAME="ID" value="${param.get("USERID")}">
-            <div class="row cl border-tg">
-                <label class="form-label col-xs-3">客户姓名：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtcustomName" name="customName" class="input-text" style="width:100%" datatype="*" nullmsg="必须填写客户姓名！" >
-                </div>
-                <label class="form-label col-xs-3">身份证号：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtcard" name="card" class="input-text " value=""/>
-                </div>
+        <div class="row cl border-tg">
+            <label class="form-label col-xs-2">客户姓名：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtcustomName" name="customName" class="input-text" datatype="*" nullmsg="必须填写客户姓名！" />
             </div>
-            <div class="row cl  border-tg">
-                <label class="form-label col-xs-3">家庭住址：</label>
-                <div class="formControls col-xs-9">
-                    <input type="text" id="txtaddress" name="address" class="input-text " value=""/>
-                </div>
+            <label class="form-label col-xs-2">身份证号：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtcard" name="card" class="input-text" />
             </div>
-            <div class="row cl border-tg">
-                <label class="form-label col-xs-3">手机号：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtphone" name="phone" class="input-text" style="width:100%" datatype="*" nullmsg="必须填写手机号！" >
-                </div>
-                <label class="form-label col-xs-3">平台：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtplatform" name="platform" class="input-text " value=""/>
-                </div>
+        </div>
+        <div class="row cl border-tg">
+            <label class="form-label col-xs-2">手机号：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtphone" name="phone" class="input-text" datatype="*" nullmsg="必须填写手机号！" />
             </div>
-            <div class="row cl border-tg">
-                <label class="form-label col-xs-3">QQ号：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtqq" name="qq" class="input-text" style="width:100%">
-                </div>
-                <label class="form-label col-xs-3">微信号：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtwebcart" name="webcart" class="input-text " value=""/>
-                </div>
+            <label class="form-label col-xs-2">平台：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtplatform" name="platform" class="input-text" />
             </div>
-            <div class="row cl border-tg">
-                <label class="form-label col-xs-3">借款金额：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtborrowbalan" name="borrowbalan" class="input-text" style="width:100%">
-                </div>
-                <label class="form-label col-xs-3">借款日期：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtborrowdate" name="borrowdate" class="input-text " datatype="*" nullmsg="必须填写借款日期！" value="" onclick="laydate()"/>
-                </div>
+        </div>
+        <div class="row cl border-tg">
+            <label class="form-label col-xs-2"> 家庭住址：</label>
+            <div class="formControls col-xs-8">
+                <textarea type="text" id="txtaddress" name="address" class="textarea" cols="6"></textarea>
             </div>
-            <div class="row cl border-tg">
-                <label class="form-label col-xs-3">还款金额：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtreplymoney" name="replymoney" class="input-text" style="width:100%">
-                </div>
-                <label class="form-label col-xs-3">还款日期：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtreplydate" name="replydate" class="input-text " datatype="*" nullmsg="必须填写借款日期！" value="" onclick="laydate()"/>
-                </div>
+        </div>
+        <div class="row cl border-tg">
+            <label class="form-label col-xs-2"> QQ号：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtqq" name="qq" class="input-text" />
             </div>
-            <div class="row cl border-tg">
-                <label class="form-label col-xs-3">押金：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtdeposit" name="deposit" class="input-text" style="width:100%">
-                </div>
-                <label class="form-label col-xs-3">中介：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtagency" name="agency" class="input-text " value=""/>
-                </div>
+            <label class="form-label col-xs-2">微信号：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtwebcart" name="webcart" class="input-text"/>
             </div>
-            <div class="row cl  border-tg">
-                <label class="form-label col-xs-3">备注：</label>
-                <div class="formControls col-xs-9">
-                    <input type="text" id="txtremark" name="remark" class="input-text " value=""/>
-                </div>
+        </div>
+        <div class="row cl border-tg">
+            <label class="form-label col-xs-2"> 借款金额：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtborrowbalan" name="borrowbalan" class="input-text" />
             </div>
+            <label class="form-label col-xs-2">借款日期：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtborrowdate" name="borrowdate" class="input-text " datatype="*" nullmsg="必须填写借款日期！" value="" onclick="laydate()" />
+            </div>
+        </div>
+        <div class="row cl border-tg">
+            <label class="form-label col-xs-2">还款金额：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtreplymoney" name="replymoney" class="input-text" />
+            </div>
+            <label class="form-label col-xs-2">还款日期：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtreplydate" name="replydate" class="input-text " datatype="*" nullmsg="必须填写还款日期！" value="" onclick="laydate()" />
+            </div>
+        </div>
+        <div class="row cl border-tg">
+            <label class="form-label col-xs-2">押金：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtdeposit" name="deposit" class="input-text" />
+            </div>
+            <label class="form-label col-xs-2">中介：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtagency" name="agency" class="input-text" />
+            </div>
+        </div>
+        <div class="row cl border-tg">
+            <label class="form-label col-xs-2">备注：</label>
+            <div class="formControls col-xs-8">
+               <%-- <input type="text" id="txtremark" name="remark" />--%>
+                   <textarea type="text" id="txtremark" name="remark" class="textarea" cols="6"></textarea>
+            </div>
+        </div>
+        <%if (((org.manage.model.APPUSER)session.getAttribute("Appuser")).getUSERTYPEID()==2){%>
+        <div class="row cl border-tg">
+            <label class="form-label col-xs-2">利润：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtprofit" name="profit" class="input-text" />
+            </div>
+        </div>
+        <div class="row cl border-tg">
+            <label class="form-label col-xs-2">实际还款金额：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtacualmoney" name="acualmoney" class="input-text" />
+            </div>
+            <label class="form-label col-xs-2">实际还款日期：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtactualdate" name="actualdate" class="input-text " value="" onclick="laydate()" />
 
-            <%if (((org.manage.model.APPUSER)session.getAttribute("Appuser")).getUSERTYPEID()==2){%>
-            <div class="row cl  border-tg">
-                <label class="form-label col-xs-3">利润：</label>
-                <div class="formControls col-xs-9">
-                    <input type="text" id="txtprofit" name="profit" class="input-text " value=""/>
-                </div>
+                <%--<input type="text" id="txtactualdate" name="actualdate" class="input-text Wdate" onfocus="WdatePicker()"/>--%>
             </div>
-            <div class="row cl">
-                <label class="form-label col-xs-3">实际还款金额：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtacualmoney" name="acualmoney" class="input-text" style="width:100%">
-                </div>
-                <label class="form-label col-xs-3">实际还款日期：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtactualdate" name="actualdate" class="input-text " value="" onclick="laydate()"/>
-                </div>
+        </div>
+        <%}else {%>
+        <div class="row cl border-tg">
+            <label class="form-label col-xs-2">利润：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" readonly="readonly" id="txtprofit" name="profit" class="input-text" />
             </div>
-            <%}else {%>
-            <div class="row cl  border-tg">
-                <label class="form-label col-xs-3">利润：</label>
-                <div class="formControls col-xs-9">
-                    <input type="text" readonly="readonly" id="txtprofit" name="profit" class="input-text " value=""/>
-                </div>
+        </div>
+        <div class="row cl border-tg">
+            <label class="form-label col-xs-2">实际还款金额：</label>
+            <div class="formControls col-xs-3">
+                <input type="text" id="txtacualmoney" readonly="readonly" name="acualmoney" class="input-text" />
             </div>
-            <div class="row cl">
-                <label class="form-label col-xs-3">实际还款金额：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtacualmoney" readonly="readonly" name="acualmoney" class="input-text" style="width:100%">
-                </div>
-                <label class="form-label col-xs-3">实际还款日期：</label>
-                <div class="formControls col-xs-3">
-                    <input type="text" id="txtactualdate" readonly="readonly" name="actualdate" class="input-text " value="" onclick="laydate()"/>
-                </div>
+            <label class="form-label col-xs-2">实际还款日期：</label>
+            <div class="formControls col-xs-3">
+                <%--<input type="text" id="txtactualdate" readonly="readonly" name="actualdate" class="input-text Wdate" onfocus="WdatePicker()"/>--%>
+                <input type="text" id="txtactualdate" readonly="readonly" name="actualdate" class="input-text " value="" onclick="laydate()" />
+
             </div>
+        </div>
         <%}%>
     </form>
-    <div class="row cl text-c">
-        <div class="mt-10 ">
-            <button id="btnSave" class="btn btn-primary-outline radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
-            <button id="btnClose" class="btn btn-primary-outline radius" type="button"><i class="Hui-iconfont">&#xe66b;</i> 返回</button>
-        </div>
+</div>
+<div class="row cl">
+    <div class="text-c">
+        <button id="btnSave" class="btn btn-primary-outline radius" type="button"><i class="Hui-iconfont">&#xe632;</i>
+            保存
+        </button>
+        <button id="btnClose" class="btn btn-primary-outline radius" type="button"><i class="Hui-iconfont">&#xe66b;</i>关闭
+        </button>
     </div>
 </div>
-
-<br><br><br><br>
-<script src="${ctx}/include/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
-<script src="${ctx}/include/Scripts/zui/js/zui.min.js"></script>
 <script src="${ctx}/include/Scripts/jquery-1.7.2.min.js"></script>
 <script src="${ctx}/include/Scripts/H-ui/lib/layer/layer.js"></script>
-<script src="${ctx}/include/Scripts/H-ui/lib/My97DatePicker/WdatePicker.js"></script>
 <script src="${ctx}/include/Scripts/H-ui/lib/Validform/5.3.2/Validform.min.js"></script>
 <script src="${ctx}/include/Scripts/H-ui/js/H-ui.js"></script>
-
 <script src="${ctx}/include/Scripts/Common.js"></script>
-<script src="${ctx}/include/Scripts/Dic.js"></script>
+<script src="${ctx}/include/Scripts/H-ui/lib/My97DatePicker/WdatePicker.js"></script>
 <script src="${ctx}/include/Scripts/laydate/laydate.js"></script>
-<script language="javascript" type="text/javascript">
-    var wForm = null;
+<script>
+    var wForm = "";
     if ($("#hID").val()!=""){
         ajaxPost("${ctx}/tcust/GetCustomerInfo", {
             ID: $("#hID").val()
@@ -173,3 +175,4 @@
 </script>
 </body>
 </html>
+

@@ -102,6 +102,7 @@ public class AdminController extends Controller {
         String tel="";
         String email="";
         String name="";
+        String type = "";
         if (params.containsKey("LOGINNAME")){
             loginName=params.get("LOGINNAME");
         }
@@ -126,7 +127,10 @@ public class AdminController extends Controller {
         if (params.containsKey("NAME")){
             name=params.get("NAME");
         }
-        retMap=APPUSER.dao.saveUserAndInfo_e(appuser,loginName,passWord,userID,sex,address,tel,email,name);
+        if(params.containsKey("TYPE")){
+            type = params.get("TYPE");
+        }
+        retMap=APPUSER.dao.saveUserAndInfo_e(appuser,loginName,passWord,userID,sex,address,tel,email,name,type);
         renderJson(retMap);
     }
     public void loginCheck(){

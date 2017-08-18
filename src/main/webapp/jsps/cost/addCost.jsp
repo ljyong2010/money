@@ -20,21 +20,21 @@
         <div class="row cl border-tg">
             <label class="form-label col-xs-3"><span class="c-red">*</span>支出明细：</label>
             <div class="formControls col-xs-3">
-                <input type="text" id="txtcostDetails" name="costDetails" class="input-text " datatype="*" nullmsg="必须填写姓名！" />
+                <input type="text" id="txtcostDetails" name="costDetails" class="input-text " datatype="*" nullmsg="必须填写明细！" />
             </div>
-            <label class="form-label col-xs-3">工资：</label>
+            <label class="form-label col-xs-3">支出金额：</label>
             <div class="formControls col-xs-3">
-                <input type="text" id="txtmoney" name="money" class="input-text " datatype="*" nullmsg="必须填工资！" />
+                <input type="text" id="txtmoney" name="money" class="input-text " datatype="*" nullmsg="必须填金额！" />
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-3"><span class="c-red">*</span>支出人员：</label>
             <div class="formControls col-xs-3">
-                <input type="text" id="txtperson" name="person" class="input-text " datatype="*" nullmsg="必须填写姓名！" />
+                <input type="text" id="txtperson" name="person" class="input-text " datatype="*" nullmsg="必须填写支出人员！" />
             </div>
-            <label class="form-label col-xs-3">开始日期：</label>
+            <label class="form-label col-xs-3">支出日期：</label>
             <div class="formControls col-xs-3">
-                <input type="text" id="txtdate" name="date" class="input-text " datatype="*" nullmsg="必须填写开始日期！" value="" onclick="laydate()" />
+                <input type="text" id="txtdate" name="date" class="input-text " datatype="*" nullmsg="必须填写支出日期！" value="" onclick="laydate()" />
             </div>
         </div>
     </form>

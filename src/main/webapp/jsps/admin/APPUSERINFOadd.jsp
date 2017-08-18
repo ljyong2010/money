@@ -16,6 +16,7 @@
 <body>
 <div class="pd-20 deform">
     <form id="webform" action="${ctx}/tuser/APPUSERINFOSave_add" class="form form-horizontal">
+        <input type="hidden" id="sTYPE" name="TYPE" value="${param.get("type")}"/>
         <div class="row cl border-tg">
             <label class="form-label col-xs-3"><span class="c-red">*</span>姓名：</label>
             <div class="formControls col-xs-3">

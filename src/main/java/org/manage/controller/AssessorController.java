@@ -46,4 +46,10 @@ public class AssessorController extends Controller {
         Map<String,Object> retMap = Customerinfo.dao.salaryShow(paramsHash);
         renderJson(retMap);
     }
+    public void totalInfo(){
+        APPUSER appuser = getSessionAttr("Appuser");
+        Map<String,String> paramsHash = JsonUtil.jsonNameToMap(this.getRequest());
+        Map<String,Object> retMap = Customerinfo.dao.gettotal(paramsHash,appuser);
+        renderJson(retMap);
+    }
 }

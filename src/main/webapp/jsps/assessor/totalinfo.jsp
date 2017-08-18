@@ -7,7 +7,7 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <title>工资信息</title>
+    <title></title>
     <link href="${ctx}/include/Scripts/H-ui/css/H-ui.min.css" rel="stylesheet" />
 
     <link href="${ctx}/include/Scripts/H-ui/lib/Hui-iconfont/iconfont.css" rel="stylesheet" />
@@ -41,10 +41,29 @@
             <thead>
             <tr>
                 <th>审核员</th>
-                <th>利润(元)</th>
-                <th>审核费(元)</th>
-                <th>工资(元)</th>
-                <th>操作</th>
+                <th>放款总额(元)</th>
+                <th>回款总额(元)</th>
+                <th>毛利(元)</th>
+                <th>审核费</th>
+                <th>毛利(元)</th>
+                <th>提成(元)</th>
+                <th>逾期总额(元)</th>
+                <th>纯利(元)</th>
+            </tr>
+            </thead>
+        </table>
+        <br/><br/><br/>
+        <table id="datalist1" class="table table-border table-bordered table-bg table-hover mt-5"style="width: 100%;">
+            <thead>
+            <tr>
+                <th>全部放款总额(元)</th>
+                <th>全部回款总额(元)</th>
+                <th>全部毛利(元)</th>
+                <th>全部审核费</th>
+                <th>全部毛利(元)</th>
+                <th>全部提成(元)</th>
+                <th>全部逾期总额(元)</th>
+                <th>全部纯利(元)</th>
             </tr>
             </thead>
         </table>
@@ -81,9 +100,11 @@
     }
     function bindData() {
         oTable = $("#datalist").dataTable({
-            "sAjaxSource": "${ctx}/tassessor/salaryInfo",
+            "sAjaxSource": "${ctx}/tassessor/totalInfo",
             "columns": [
                 { "data": "LOGINNAME"},
+                { "data": "BOR"},
+                { "data": "ACU"},
                 { "data": null, "sClass": "text-c", "sWidth": "150px", "mRender": function (data, type, full) { return Profit(data); } },
                 { "data": "rev" ,"sWidth": "150px"},
                 { "data": null, "sClass": "text-c", "sWidth": "150px", "mRender": function (data, type, full) { return GAIN(data); } },

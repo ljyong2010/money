@@ -21,7 +21,7 @@
 <div class="pd-20">
     <div id="search" class="text-c pd">
         <form id="webform">
-            支出内容：<input type="text" class="input-text" style="width: 200px" placeholder="关键字" id="txtcostDetails" name="costDetails" />
+            支出明细：<input type="text" class="input-text" style="width: 200px" placeholder="关键字" id="txtcostDetails" name="costDetails" />
             &nbsp;&nbsp;开始日期：<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" onclick="laydate()" id="txtstartDate" name="startDate" />
             -&nbsp;<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" onclick="laydate()" id="txtendDate" name="endDate" />
             &nbsp;&nbsp;<button type="button" class="btn btn-primary radius" id="btnSearch"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
@@ -60,7 +60,7 @@
 <script>
     var oTable = null;
     $(function () {
-        $("#search").hide();
+        /*$("#search").hide();*/
         $("#btnChange").click(function () { $("#search").slideToggle();});
         $("#btnSearch").click(function () { oTable.fnDraw(); });
         $("#btnRemove").click(function () {

@@ -68,7 +68,7 @@
             oTable.fnDraw();
         });
         $("#btnNew").click(function () {
-            openWin('${ctx}/tuser?pindex=APPUSERINFOadd', '新增用户', 640, 400);
+            openWin('${ctx}/tuser?pindex=APPUSERINFOadd&type='+$("#hTYPE").val(), '新增用户', 640, 400);
         });
         $("#btnRemove").click(function () {
             $("#webform :input").not(":button, :submit, :reset, :hidden").val("").removeAttr("checked").remove("selected");

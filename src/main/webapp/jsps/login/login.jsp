@@ -58,7 +58,6 @@
                     <img id="imgCode" src="${ctx}/tlogin/code" onclick="this.src='${ctx}/tlogin/code?x='+Math.random()"
                          alt="验证码" title="点击刷新" style="vertical-align: top; height:48px"/></li>
                 <li><input id="btnLogin" name="" type="button" class="loginbtn" value="登录"/>
-                    <%--<label><a href="${ctx}/tpage/registBefore?pindex=regist" target="_blank">注册</a></label>--%>
                     <label><a href="${ctx}/tlogin/forget" id="txtForgetPwd" target="_blank">忘记密码？</a></label></li>
             </ul>
         </div>
@@ -86,8 +85,6 @@
                 $.post("${ctx}/tlogin/login", $("#webform").serializeArray(), function (d) {
                     if (d.code == 1) {
                         location.href = "/";
-                    } else if (d.code == 2) {
-                        location.href = "${ctx}/tpage/registBefore?pindex=regist";
                     }
                     else {
                         layer.alert(d.msg);
@@ -99,9 +96,6 @@
             else {
                 wForm.ajaxPost();
             }
-        });
-        $("#btnRegist").click(function () {
-            $.post("${ctx}/tpage?pindex=regist");
         });
     });
 </script>

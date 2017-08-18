@@ -70,7 +70,7 @@ public class APPUSER extends BaseAPPUSER<APPUSER> {
 		return count;
 	}
 
-	public Map<String, Object> saveUserAndInfo_e(APPUSER appuser, String loginName, String passWord, String userID, Integer sex, String address, String tel, String email, String name) {
+	public Map<String, Object> saveUserAndInfo_e(APPUSER appuser, String loginName, String passWord, String userID, Integer sex, String address, String tel, String email, String name,String type) {
 		Map<String, Object> retMap = new HashMap<String, Object>();
 		if (userID.equals("")) {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -95,7 +95,7 @@ public class APPUSER extends BaseAPPUSER<APPUSER> {
 			appuser1.setREALNAME(name);
 			appuser1.setPASSWORD(passWord);
 			appuser1.setUSERSTATUS(0);
-			appuser1.setUSERTYPEID(1);
+			appuser1.setUSERTYPEID(Integer.parseInt(type));
 			appuser1.setMAPID(uuid);
 
 			Db.tx(new IAtom() {

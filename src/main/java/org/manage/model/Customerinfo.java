@@ -174,4 +174,23 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		Map<String,Object> retMap = Pager.PageMap(params,page);
 		return retMap;
 	}
+	public Map<String,Object> gettotal(Map<String,String> params,APPUSER appuser){
+		int uid = appuser.getUSERTYPEID();
+		String sqlForm = "from customerinfo a left join appuser b on a.assessorId = b.userid where flag=0";
+		SqlBuilder sqlBuilder = new SqlBuilder(null);
+		if (uid == 2){
+			sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,params.get("assessorId"));
+		}else {
+			sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,appuser.getUSERID());
+		}
+		sqlBuilder.addCondition("a","borrowdate", SqlBuilder.Condition.GE,params.get("startDate"));
+		sqlBuilder.addCondition("a","borrowdate", SqlBuilder.Condition.LE,params.get("endDate"));
+		String sql = sqlBuilder.build();
+		Object[] pars = sqlBuilder.paras();
+		sqlForm += sql;
+		String strsel = "select a.assessorId,sum(a.borrowbalan) as BOR,sum(a.acualmoney) as ACU,sum(a.replymoney) as REP,sum(a.revfee) as REV,b.LOGINNAME";
+		Page<Record> page = Pagination.JPaginate(params,strsel,sqlForm+" group by b.LOGINNAME,a.assessorId",pars);
+		Map<String,Object> retMap = Pager.PageMap(params,page);
+		return retMap;
+	}
 }
