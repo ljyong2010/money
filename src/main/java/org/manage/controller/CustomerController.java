@@ -45,6 +45,7 @@ public class CustomerController extends Controller {
         if (Strings.isNullOrEmpty(customerinfo.getID())){
             customerinfo.setID(JsonUtil.getUUID());
             customerinfo.setAssessorId(appuser.getUSERID());
+            customerinfo.setAcualmoney(0.0);
             if (customerinfo.save()){
                 retMap.put("code",1);
                 retMap.put("msg","");
@@ -53,6 +54,7 @@ public class CustomerController extends Controller {
                 retMap.put("msg","save fail");
             }
         }else {
+            customerinfo.setAcualmoney(0.0);
             if (customerinfo.update()){
                 retMap.put("code",1);
                 retMap.put("msg","");
