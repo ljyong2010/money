@@ -150,7 +150,7 @@ public class APPUSER extends BaseAPPUSER<APPUSER> {
 		return retMap;
 	}
 	public List<APPUSER> getLName(){
-		List<APPUSER> list = dao.find("select USERID,LOGINNAME from APPUSER");
+		List<APPUSER> list = dao.find("select USERID,LOGINNAME from APPUSER where USERTYPEID=3 AND DELFLAG=0");
 		return list;
 	}
 }

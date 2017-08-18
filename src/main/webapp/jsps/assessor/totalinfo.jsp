@@ -45,8 +45,6 @@
                 <th>回款总额(元)</th>
                 <th>毛利(元)</th>
                 <th>审核费</th>
-                <th>毛利(元)</th>
-                <th>提成(元)</th>
                 <th>逾期总额(元)</th>
                 <th>纯利(元)</th>
             </tr>
@@ -60,8 +58,6 @@
                 <th>全部回款总额(元)</th>
                 <th>全部毛利(元)</th>
                 <th>全部审核费</th>
-                <th>全部毛利(元)</th>
-                <th>全部提成(元)</th>
                 <th>全部逾期总额(元)</th>
                 <th>全部纯利(元)</th>
             </tr>
@@ -87,7 +83,9 @@
         $("#btnRemove").click(function () {
             $("#webform :input").not(":button, :submit, :reset, :hidden").val("").removeAttr("checked").remove("selected");
         });
-        load(bindData());
+        load(ld());
+        bindData();
+        bindData1();
     });
     function load(fnCallBack) {
         ajaxPost("${ctx}/tassessor/userName", {}, function (d) {
@@ -98,6 +96,8 @@
             fnCallBack();
         });
     }
+    function ld() {
+    }
     function bindData() {
         oTable = $("#datalist").dataTable({
             "sAjaxSource": "${ctx}/tassessor/totalInfo",
@@ -106,25 +106,47 @@
                 { "data": "BOR"},
                 { "data": "ACU"},
                 { "data": null, "sClass": "text-c", "sWidth": "150px", "mRender": function (data, type, full) { return Profit(data); } },
-                { "data": "rev" ,"sWidth": "150px"},
-                { "data": null, "sClass": "text-c", "sWidth": "150px", "mRender": function (data, type, full) { return GAIN(data); } },
-                { "data": null, "sClass": "text-c", "sWidth": "100px", "mRender": function (data, type, full) { return Btns(data); } }
+                { "data": "REV" ,"sWidth": "150px"},
+                { "data": null, "sClass": "text-c", "sWidth": "150px", "mRender": function (data, type, full) { return Yq(data); } },
+                { "data": null, "sClass": "text-c", "sWidth": "100px", "mRender": function (data, type, full) { return GAIN(data); } }
             ]
         });
     }
-    function Btns(data) {
-        var userid=data.assessorId;
-        var sdate = $("#txtstartDate").val();
-        var edate = $("#txtendDate").val();
-        var btns = ['<a onclick="openWinFull(\'${ctx}/tassessor?pindex=showsalary&USERID=' + userid + '&sdate='+sdate+'&edate='+edate+'\',\'查看\',640, 600);\" class="btn-link">查看</a>'];
-        return btns.join('&nbsp; ');
-    }
     function Profit(data) {
-        var a3=(parseFloat(data.acu)- parseFloat(data.bor))*0.2;
+        var a3=parseFloat(data.ACU)- parseFloat(data.BOR);
         return a3.toFixed(2);
     }
+    function Yq(data) {
+        var a1=parseFloat(data.REP)-parseFloat(data.ACU);
+        return a1.toFixed(2);
+    }
     function GAIN(data) {
-        var a3=(parseFloat(data.acu)-parseFloat(data.bor))*0.2+data.rev;
+        var a3=parseFloat(data.ACU)- parseFloat(data.BOR)-data.REV;
+        return a3.toFixed(2);
+    }
+    function bindData1() {
+        oTable = $("#datalist1").dataTable({
+           "sAjaxSource":"${ctx}/tassessor/total",
+            "columns":[
+                { "data": "ZBOR"},
+                { "data": "ZACU"},
+                { "data": null, "sClass": "text-c", "sWidth": "150px", "mRender": function (data, type, full) { return Profit1(data); } },
+                { "data": "ZREV" ,"sWidth": "150px"},
+                { "data": null, "sClass": "text-c", "sWidth": "150px", "mRender": function (data, type, full) { return Yq1(data); } },
+                { "data": null, "sClass": "text-c", "sWidth": "100px", "mRender": function (data, type, full) { return GAIN1(data); } }
+            ]
+        });
+    }
+    function Profit1(data) {
+        var a3=parseFloat(data.ZACU)- parseFloat(data.ZBOR);
+        return a3.toFixed(2);
+    }
+    function Yq1(data) {
+        var a1=parseFloat(data.ZREP)-parseFloat(data.ZACU);
+        return a1.toFixed(2);
+    }
+    function GAIN1(data) {
+        var a3=parseFloat(data.ZACU)- parseFloat(data.ZBOR)-data.ZREV;
         return a3.toFixed(2);
     }
 </script>
