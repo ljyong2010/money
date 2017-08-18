@@ -53,6 +53,7 @@
                 <th>借款日期</th>
                 <th>还款金额</th>
                 <th>还款日期</th>
+                <th>审核员</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -98,6 +99,7 @@
                 { "data": null, "sClass": "text-c","sWidth": "110px","mRender": function (data) { return data.borrowdate==null?"-":data.borrowdate.substring(0,10);} },
                 { "data": "replymoney","sWidth": "80px" },
                 { "data": null, "sClass": "text-c","sWidth": "110px","mRender": function (data) { return data.replydate==null?"-":data.replydate.substring(0,10);} },
+                { "data": "LOGINNAME"},
                 { "data": null, "sClass": "text-c", "sWidth": "250px", "mRender": function (data, type, full) { return Btns(data); } }
             ]
         });

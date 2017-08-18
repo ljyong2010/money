@@ -21,13 +21,15 @@ public class AssessorController extends Controller {
         renderJson();
     }
     public void assessorList(){
+        APPUSER appuser = getSessionAttr("Appuser");
         Map<String,String> paramsHash= JsonUtil.jsonNameToMap(this.getRequest());
-        Map<String,Object> retMap = Customerinfo.dao.getAssload(paramsHash);
+        Map<String,Object> retMap = Customerinfo.dao.getAssload(paramsHash,appuser);
         renderJson(retMap);
     }
     public void overdueMenoy(){
+        APPUSER appuser = getSessionAttr("Appuser");
         Map<String,String> paramsHash= JsonUtil.jsonNameToMap(this.getRequest());
-        Map<String,Object> retMap = Customerinfo.dao.getOverdue(paramsHash);
+        Map<String,Object> retMap = Customerinfo.dao.getOverdue(paramsHash,appuser);
         renderJson(retMap);
     }
     public void overShowMenoy(){

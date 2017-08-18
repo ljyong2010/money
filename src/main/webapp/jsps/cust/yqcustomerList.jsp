@@ -1,3 +1,4 @@
+<%@ page import="org.manage.model.APPUSER" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -22,6 +23,12 @@
     <div id="search" class="text-c pd">
         <form id="webform">
             <input type="hidden" id="hUID" name="UID" >
+            <%int typeid = ((APPUSER)session.getAttribute("Appuser")).getUSERTYPEID();
+                if (typeid == 2){%>
+            <select id="sassessorId" name="assessorId" class="select-box" style="width: 150px"></select>
+            <%}else {%>
+            <select id="sassessorId" name="assessorId" class="select-box" style="width: 150px" disabled="disabled"></select>
+            <%}%>&nbsp;&nbsp;&nbsp;
             客户姓名：<input type="text" class="input-text" style="width: 200px" placeholder="关键字" id="txtcustomName" name="customName" />
             &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary radius" id="btnSearch"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
             &nbsp;&nbsp;
@@ -43,6 +50,7 @@
                 <th>借款日期</th>
                 <th>还款金额</th>
                 <th>还款日期</th>
+                <th>审核员</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -67,8 +75,17 @@
         $("#btnRemove").click(function () {
             $("#webform :input").not(":button, :submit, :reset, :hidden").val("").removeAttr("checked").remove("selected");
         });
-        bindData();
+        load(bindData());
     });
+    function load(fnCallBack) {
+        ajaxPost("${ctx}/tassessor/userName", {}, function (d) {
+            $('<option value="">选择审核员</option>').appendTo($("#sassessorId"));
+            $.each(d.data, function (i, v) {
+                $('<option value="' + v.USERID + '">' + v.LOGINNAME + '</option>').appendTo($("#sassessorId"));
+            });
+            fnCallBack();
+        });
+    }
     function bindData() {
         oTable = $("#datalist").dataTable({
             "sAjaxSource": "${ctx}/tcust/yqcustomList",
@@ -79,6 +96,7 @@
                 { "data": null, "sClass": "text-c","sWidth": "110px","mRender": function (data) { return data.borrowdate==null?"-":data.borrowdate.substring(0,10);} },
                 { "data": "replymoney","sWidth": "80px" },
                 { "data": null, "sClass": "text-c","sWidth": "110px","mRender": function (data) { return data.replydate==null?"-":data.replydate.substring(0,10);} },
+                {"data": "LOGINNAME"},
                 { "data": null, "sClass": "text-c", "sWidth": "250px", "mRender": function (data, type, full) { return Btns(data); } }
             ]
         });

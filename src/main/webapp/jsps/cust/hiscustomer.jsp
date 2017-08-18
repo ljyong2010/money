@@ -39,10 +39,6 @@
 
         </form>
     </div>
-  <%--  <div class="cl pd-5 bg-1 bk-gray mt-10">
-        <span class="l"></span>
-        <span class="r"><a id="btnNew" onclick="openWinFull('${ctx}/tcust?pindex=addcustomer','新增',640, 600);" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加</a></span>
-    </div>--%>
     <div class="cl">
         <table id="datalist" class="table table-border table-bordered table-bg table-hover mt-5"style="width: 100%;">
             <thead>

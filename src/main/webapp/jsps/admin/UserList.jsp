@@ -93,7 +93,15 @@
         return btns.join('&nbsp; ');
     }
     function delAsk(USERID, username) {
-        layer.confirm("确认删除[" + username + "]吗？", function () { ajaxPost("${ctx}/tuser/UserDelete", { USERID: USERID }, function (d) { if (d.code > -1) { layer.msg("删除成功", { time: 300 }, function () { oTable.fnDraw(); }); } else { layer.alert("删除失败！" + d.msg); } }) });
+        layer.confirm("确认删除[" + username + "]吗？", function () { ajaxPost("${ctx}/tuser/UserDelete", { USERID: USERID }, function (d) {
+            if (d.code > -1) {
+                layer.msg("删除成功", { time: 300 }, function () {
+                    oTable.fnDraw();
+                });
+            } else {
+                layer.alert("删除失败！" + d.msg);
+            }
+        }) });
     }
 </script>
 </body>

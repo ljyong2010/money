@@ -23,36 +23,38 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 	public Map<String,Object> getCustomList(Map<String,String> params,APPUSER appuser){
 		Map<String,Object> retMap = new HashMap<>();
 		int uid = appuser.getUSERTYPEID();
-		String sqlForm = "from customerinfo where flag = 0 and payId = 0";
+		String sqlForm = "from customerinfo a left join appuser b on a.assessorId = b.userid where a.flag = 0 and a.payId = 0";
 		SqlBuilder sqlBuilder = new SqlBuilder(null);
 		if (uid != 2){
-			sqlBuilder.addCondition("assessorId", SqlBuilder.Condition.EQ,appuser.getUSERID());
+			sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,appuser.getUSERID());
 		}
 		if (params.containsKey("assessorId")){
-			sqlBuilder.addCondition("assessorId", SqlBuilder.Condition.EQ,params.get("assessorId"));
+			sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,params.get("assessorId"));
 		}
-		sqlBuilder.addCondition("replydate", SqlBuilder.Condition.GE,DateUtil.getDateTimeFormat(new Date()));
-		sqlBuilder.addCondition("customName", SqlBuilder.Condition.RLIKE,params.get("customName"));
+		sqlBuilder.addCondition("a","replydate", SqlBuilder.Condition.GE,DateUtil.getDateTimeFormat(new Date()));
+		sqlBuilder.addCondition("a","customName", SqlBuilder.Condition.RLIKE,params.get("customName"));
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();
 		sqlForm+=sql;
-		Page<Record> recordPage = Pagination.JPaginate(params,"select *,"+uid+" as UID",sqlForm,pars);
+		Page<Record> recordPage = Pagination.JPaginate(params,"select a.*,b.LOGINNAME,"+uid+" as UID",sqlForm,pars);
 		retMap = Pager.PageMap(params,recordPage);
 		return retMap;
 	}
 	public Map<String,Object> getYqCustomList(Map<String,String> params,APPUSER appuser){
-		String sqlForm = "from customerinfo where flag = 0 and payId = 0 ";
+		String sqlForm = "from customerinfo a left join appuser b on a.assessorId=b.userid where a.flag = 0 and a.payId = 0 ";
 		int uid = appuser.getUSERTYPEID();
 		SqlBuilder sqlBuilder = new SqlBuilder(null);
-		sqlBuilder.addCondition("replydate", SqlBuilder.Condition.LT,DateUtil.getDateTimeFormat(new Date()));
+		sqlBuilder.addCondition("a","replydate", SqlBuilder.Condition.LT,DateUtil.getDateTimeFormat(new Date()));
 		if (uid !=2){
-			sqlBuilder.addCondition("assessorId", SqlBuilder.Condition.EQ,appuser.getUSERID());
+			sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,appuser.getUSERID());
+		}else {
+			sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,params.get("assessorId"));
 		}
-		sqlBuilder.addCondition("customName", SqlBuilder.Condition.RLIKE,params.get("customName"));
+		sqlBuilder.addCondition("a","customName", SqlBuilder.Condition.RLIKE,params.get("customName"));
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();
 		sqlForm+=sql;
-		Page<Record> recordPage = Pagination.JPaginate(params,"select *,"+uid+" as UID",sqlForm,pars);
+		Page<Record> recordPage = Pagination.JPaginate(params,"select a.*,b.LOGINNAME,"+uid+" as UID",sqlForm,pars);
 		Map<String,Object> retMap = Pager.PageMap(params,recordPage);
 		return retMap;
 	}
@@ -82,13 +84,18 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		}
 		return retMap;
 	}
-	public Map<String,Object> getAssload(Map<String,String> params){
-		/*select sum(a.borrowbalan) as b1,sum(a.acualmoney),b.loginname from customerinfo a left join appuser b on a.assessorId=b.userid group by a.assessorId,b.loginname;*/
+	public Map<String,Object> getAssload(Map<String,String> params,APPUSER appuser){
+		int uid = appuser.getUSERTYPEID();
 		String sqlForm = "from customerinfo a left join appuser b on a.assessorId=b.userid where flag = 0";
 		SqlBuilder sqlBuilder = new SqlBuilder(null);
 		sqlBuilder.addCondition("a","borrowdate", SqlBuilder.Condition.GE,params.get("startDate"));
 		sqlBuilder.addCondition("a","borrowdate", SqlBuilder.Condition.LE,params.get("endDate"));
-		sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,params.get("USERID"));
+		if (uid==2){
+			sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,params.get("USERID"));
+		}else {
+			sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,appuser.getUSERID());
+		}
+
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();
 		sqlForm+=sql;
@@ -96,12 +103,24 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		Map<String,Object> retMap = Pager.PageMap(params,page);
 		return retMap;
 	}
-	public Map<String,Object> getOverdue(Map<String,String> params){
+
+	/**
+	 * 明天查看 overduemenoy
+	 * @param params
+	 * @param appuser
+	 * @return
+	 */
+	public Map<String,Object> getOverdue(Map<String,String> params,APPUSER appuser){
+		int uid = appuser.getUSERTYPEID();
 		String sqlForm = "from customerinfo a left join appuser b on a.assessorId=b.userid where flag = 0 and payId=0";
 		SqlBuilder sqlBuilder = new SqlBuilder(null);
 		sqlBuilder.addCondition("a","replydate", SqlBuilder.Condition.GE,params.get("startDate"));
 		sqlBuilder.addCondition("a","replydate", SqlBuilder.Condition.LE,params.get("endDate"));
-		sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,params.get("USERID"));
+		if (uid==2){
+			sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,params.get("USERID"));
+		}else {
+			sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,appuser.getUSERID());
+		}
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();
 		sqlForm+=sql;
@@ -109,6 +128,12 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		Map<String,Object> retMap = Pager.PageMap(params,page);
 		return retMap;
 	}
+
+	/**
+	 * showwoverdue
+	 * @param params
+	 * @return
+	 */
 	public Map<String,Object> getOverShow(Map<String,String> params){
 		String sqlForm = "from customerinfo a left join appuser b on a.assessorId=b.userid where flag = 0 and payId=0";
 		SqlBuilder sqlBuilder = new SqlBuilder(null);
@@ -152,8 +177,8 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		if (params.containsKey("assessorId")){
 			sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,params.get("assessorId"));
 		}
-		sqlBuilder.addCondition("a","replydate", SqlBuilder.Condition.GE,params.get("startDate"));
-		sqlBuilder.addCondition("a","replydate", SqlBuilder.Condition.LE,params.get("endDate"));
+		sqlBuilder.addCondition("a","borrowdate", SqlBuilder.Condition.GE,params.get("startDate"));
+		sqlBuilder.addCondition("a","borrowdate", SqlBuilder.Condition.LE,params.get("endDate"));
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();
 		sqlForm+=sql;
@@ -164,8 +189,8 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 	public Map<String,Object> salaryShow(Map<String,String> params){
 		String sqlForm = "from customerinfo a left join appuser b on a.assessorId = b.userid where flag=0";
 		SqlBuilder sqlBuilder = new SqlBuilder(null);
-		sqlBuilder.addCondition("a","replydate", SqlBuilder.Condition.GE,params.get("startDate"));
-		sqlBuilder.addCondition("a","replydate", SqlBuilder.Condition.LE,params.get("endDate"));
+		sqlBuilder.addCondition("a","borrowdate", SqlBuilder.Condition.GE,params.get("startDate"));
+		sqlBuilder.addCondition("a","borrowdate", SqlBuilder.Condition.LE,params.get("endDate"));
 		sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,params.get("USERID"));
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();

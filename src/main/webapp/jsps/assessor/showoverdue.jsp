@@ -16,9 +16,6 @@
 </head>
 
 <body>
-<%--<div class="btn-primary change"  align="center" >
-    <span id="btnChange" style="cursor:pointer;" >高级搜索 <i class="Hui-iconfont"></i></span>
-</div>--%>
 <div class="pd-20">
     <div class="text-c pd">
         <form id="webform">

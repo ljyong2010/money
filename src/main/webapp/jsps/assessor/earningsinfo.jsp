@@ -1,3 +1,4 @@
+<%@ page import="org.manage.model.APPUSER" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -22,7 +23,13 @@
     <div class="pd-20">
         <div id="search" class="text-c pd">
             <form id="webform">
+                <%int typeid = ((APPUSER)session.getAttribute("Appuser")).getUSERTYPEID();
+                    if (typeid == 2){%>
                 <select id="sUSERID" name="USERID" class="select-box" style="width: 150px"></select>
+                <%}else {%>
+                <select id="sUSERID" name="USERID" class="select-box" style="width: 150px" disabled="disabled"></select>
+                <%}%>
+
                 &nbsp;&nbsp;开始日期：<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" onclick="laydate()" id="txtstartDate" name="startDate" />
                 -&nbsp;<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" onclick="laydate()" id="txtendDate" name="endDate" />
                 &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary radius" id="btnSearch"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
@@ -38,7 +45,6 @@
                     <th>放款金额</th>
                     <th>回款金额</th>
                     <th>利润</th>
-                  <%--  <th>操作</th>--%>
                 </tr>
                 </thead>
             </table>
@@ -86,7 +92,6 @@
                         { "data": "LOANS" },
                         { "data": "RECEMENOY" },
                         { "data": null, "sClass": "text-c", "sWidth": "80px", "mRender": function (data, type, full) { return GAIN(data); } }
-                        /* { "data": null, "sClass": "text-c", "sWidth": "100px", "mRender": function (data, type, full) { return Btns(data); } }*/
                     ]
                 });
             }
