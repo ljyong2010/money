@@ -20,6 +20,16 @@ import java.util.Map;
 public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 	public static final Customerinfo dao = new Customerinfo().dao();
 
+	public Map<String,Object> checkCart(String cart){
+		Map<String,Object> retMap = new HashMap<>();
+		if (Db.queryInt("select count(1) from customerinfo where card=?",cart)>0){
+			retMap.put("code",1);
+		}else {
+			retMap.put("code",-1);
+		}
+		return retMap;
+	}
+
 	public Map<String,Object> getCustomList(Map<String,String> params,APPUSER appuser){
 		Map<String,Object> retMap = new HashMap<>();
 		int uid = appuser.getUSERTYPEID();
@@ -114,8 +124,8 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		int uid = appuser.getUSERTYPEID();
 		String sqlForm = "from customerinfo a left join appuser b on a.assessorId=b.userid where flag = 0 and payId=0";
 		SqlBuilder sqlBuilder = new SqlBuilder(null);
-		sqlBuilder.addCondition("a","replydate", SqlBuilder.Condition.GE,params.get("startDate"));
-		sqlBuilder.addCondition("a","replydate", SqlBuilder.Condition.LE,params.get("endDate"));
+		sqlBuilder.addCondition("a","borrowdate", SqlBuilder.Condition.GE,params.get("startDate"));
+		sqlBuilder.addCondition("a","borrowdate", SqlBuilder.Condition.LE,params.get("endDate"));
 		if (uid==2){
 			sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,params.get("USERID"));
 		}else {
@@ -124,7 +134,7 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();
 		sqlForm+=sql;
-		Page<Record> page = Pagination.JPaginate(params,"select sum(a.replymoney) as GIVEMENOY,sum(a.acualmoney) as ACTMENOY,LOGINNAME",sqlForm+" group by b.loginname",pars);
+		Page<Record> page = Pagination.JPaginate(params,"select a.assessorId,sum(a.replymoney) as GIVEMENOY,sum(a.acualmoney) as ACTMENOY,LOGINNAME",sqlForm+" group by b.loginname,a.assessorId",pars);
 		Map<String,Object> retMap = Pager.PageMap(params,page);
 		return retMap;
 	}
@@ -137,8 +147,8 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 	public Map<String,Object> getOverShow(Map<String,String> params){
 		String sqlForm = "from customerinfo a left join appuser b on a.assessorId=b.userid where flag = 0 and payId=0";
 		SqlBuilder sqlBuilder = new SqlBuilder(null);
-		sqlBuilder.addCondition("a","replydate", SqlBuilder.Condition.GE,params.get("sdate"));
-		sqlBuilder.addCondition("a","replydate", SqlBuilder.Condition.LE,params.get("edate"));
+		sqlBuilder.addCondition("a","borrowdate", SqlBuilder.Condition.GE,params.get("sdate"));
+		sqlBuilder.addCondition("a","borrowdate", SqlBuilder.Condition.LE,params.get("edate"));
 		sqlBuilder.addCondition("a","assessorId", SqlBuilder.Condition.EQ,params.get("USERID"));
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();

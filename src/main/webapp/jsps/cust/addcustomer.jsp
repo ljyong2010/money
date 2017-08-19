@@ -25,6 +25,11 @@
             <div class="formControls col-xs-3">
                 <input type="text" id="txtcard" name="card" class="input-text" />
             </div>
+            <div class="form-label col-xs-2">
+                <button id="btnCheck" class="btn btn-primary-outline radius" type="button"><i class="Hui-iconfont">&#xe632;</i>
+                    是否可用
+                </button>
+            </div>
         </div>
         <div class="row cl border-tg">
             <label class="form-label col-xs-2">手机号：</label>
@@ -171,6 +176,17 @@
                 wForm.ajaxPost();
             }
         });
+        $("#btnCheck").click(
+            function () {
+                ajaxPost("${ctx}/tcust/checkUserCard",{card:$("#txtcard").val()},function (d) {
+                    if (d.code > 0){
+                        layer.alert("客户已经存在！");
+                    }else {
+                        layer.alert("可以使用！");
+                    }
+                })
+            }
+        )
     });
 </script>
 </body>

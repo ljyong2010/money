@@ -29,8 +29,8 @@
             <%}else {%>
             <select id="sUSERID" name="USERID" class="select-box" style="width: 150px" disabled="disabled"></select>
             <%}%>
-            &nbsp;&nbsp;开始日期：<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" onclick="laydate()" id="txtstartDate" name="startDate" />
-            -&nbsp;<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" onclick="laydate()" id="txtendDate" name="endDate" />
+            &nbsp;&nbsp;开始日期：<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" datatype="*" nullmsg="必须填写开始日期！" onclick="laydate()" id="txtstartDate" name="startDate" />
+            -&nbsp;<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" datatype="*" nullmsg="必须填写结束日期！" onclick="laydate()" id="txtendDate" name="endDate" />
             &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary radius" id="btnSearch"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
             &nbsp;&nbsp;
             <button type="button" class="btn btn-primary radius" id="btnRemove" ><i class="Hui-iconfont">&#xe68f;</i> 清空</button>
@@ -56,20 +56,29 @@
 <script src="${ctx}/include/Scripts/H-ui/lib/My97DatePicker/WdatePicker.js"></script>
 <script src="${ctx}/include/Scripts/H-ui/lib/DataTables/jquery.dataTables.min.js"></script>
 <script src="${ctx}/include/Scripts/H-ui/lib/DataTables/jquery.dataTables.defaults.js"></script>
+<script src="${ctx}/include/Scripts/H-ui/lib/Validform/5.3.2/Validform.min.js"></script>
 <script src="${ctx}/include/Scripts/H-ui/js/H-ui.js"></script>
 <script src="${ctx}/include/Scripts/laydate/laydate.js"></script>
 <script src="${ctx}/include/Scripts/Common.js"></script>
 <script>
     var oTable = null;
+    var webform= $("#webform").Validform();
     $(function () {
         /*$("#search").hide();*/
         $("#btnChange").click(function () { $("#search").slideToggle();});
-        $("#btnSearch").click(function () { oTable.fnDraw(); });
+        $("#btnSearch").click(function () {
+            if(webform.check()){
+                bindData();
+            }
+        });
         $("#btnRemove").click(function () {
             $("#webform :input").not(":button, :submit, :reset, :hidden").val("").removeAttr("checked").remove("selected");
         });
-        load(bindData());
+        load(ld());
     });
+    function ld() {
+
+    }
     function load(fnCallBack) {
         ajaxPost("${ctx}/tassessor/userName", {}, function (d) {
             $('<option value="">选择审核员</option>').appendTo($("#sUSERID"));
@@ -80,22 +89,26 @@
         });
     }
     function bindData() {
-        oTable = $("#datalist").dataTable({
-            "sAjaxSource": "${ctx}/tassessor/overdueMenoy",
-            "columns": [
-                { "data": "LOGINNAME"},
-                { "data": "GIVEMENOY" },
-                { "data": "ACTMENOY" },
-                { "data": null, "sClass": "text-c", "sWidth": "80px", "mRender": function (data, type, full) { return GAIN(data); } },
-                 { "data": null, "sClass": "text-c", "sWidth": "100px", "mRender": function (data, type, full) { return Btns(data); } }
-            ]
-        });
+        if (oTable){
+            oTable.fnDraw();
+        }else {
+            oTable = $("#datalist").dataTable({
+                "sAjaxSource": "${ctx}/tassessor/overdueMenoy",
+                "columns": [
+                    { "data": "LOGINNAME"},
+                    { "data": "GIVEMENOY" },
+                    { "data": "ACTMENOY" },
+                    { "data": null, "sClass": "text-c", "sWidth": "80px", "mRender": function (data, type, full) { return GAIN(data); } },
+                    { "data": null, "sClass": "text-c", "sWidth": "100px", "mRender": function (data, type, full) { return Btns(data); } }
+                ]
+            });
+        }
+
     }
     function Btns(data) {
-        var userid=$("#sUSERID").val();
         var sdate = $("#txtstartDate").val();
         var edate = $("#txtendDate").val();
-        var btns = ['<a onclick="openWinFull(\'${ctx}/tassessor?pindex=showoverdue&USERID=' + userid + '&sdate='+sdate+'&edate='+edate+'\',\'查看\',640, 600);\" class="btn-link">查看</a>'];
+        var btns = ['<a onclick="openWinFull(\'${ctx}/tassessor?pindex=showoverdue&USERID=' + data.assessorId + '&sdate='+sdate+'&edate='+edate+'\',\'查看\',640, 600);\" class="btn-link">查看</a>'];
         return btns.join('&nbsp; ');
     }
     function GAIN(data) {

@@ -104,4 +104,10 @@ public class CustomerController extends Controller {
         Map<String,Object> retMap = Customerinfo.dao.getHisCust(paramsHash,appuser);
         renderJson(retMap);
     }
+    public void checkUserCard(){
+        Map<String,String> paramMap=JsonUtil.jToMap(this.getRequest());
+        String cart = paramMap.get("card");
+        Map<String,Object> retMap = Customerinfo.dao.checkCart(cart);
+        renderJson(retMap);
+    }
 }

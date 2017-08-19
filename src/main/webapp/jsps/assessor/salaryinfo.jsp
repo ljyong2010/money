@@ -29,8 +29,8 @@
             <%}else {%>
             <select id="sassessorId" name="assessorId" class="select-box" style="width: 150px" disabled="disabled"></select>
             <%}%>
-            &nbsp;&nbsp;开始日期：<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" onclick="laydate()" id="txtstartDate" name="startDate" />
-            -&nbsp;<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" onclick="laydate()" id="txtendDate" name="endDate" />
+            &nbsp;&nbsp;开始日期：<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" datatype="*" nullmsg="必须填写开始日期！"  onclick="laydate()" id="txtstartDate" name="startDate" />
+            -&nbsp;<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" datatype="*" nullmsg="必须填写结束日期！"  onclick="laydate()" id="txtendDate" name="endDate" />
             &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary radius" id="btnSearch"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
             &nbsp;&nbsp;
             <button type="button" class="btn btn-primary radius" id="btnRemove" ><i class="Hui-iconfont">&#xe68f;</i> 清空</button>
@@ -56,19 +56,25 @@
 <script src="${ctx}/include/Scripts/H-ui/lib/My97DatePicker/WdatePicker.js"></script>
 <script src="${ctx}/include/Scripts/H-ui/lib/DataTables/jquery.dataTables.min.js"></script>
 <script src="${ctx}/include/Scripts/H-ui/lib/DataTables/jquery.dataTables.defaults.js"></script>
+<script src="${ctx}/include/Scripts/H-ui/lib/Validform/5.3.2/Validform.min.js"></script>
 <script src="${ctx}/include/Scripts/H-ui/js/H-ui.js"></script>
 <script src="${ctx}/include/Scripts/laydate/laydate.js"></script>
 <script src="${ctx}/include/Scripts/Common.js"></script>
 <script>
     var oTable = null;
+    var webform= $("#webform").Validform();
     $(function () {
         /*$("#search").hide();*/
         $("#btnChange").click(function () { $("#search").slideToggle();});
-        $("#btnSearch").click(function () { oTable.fnDraw(); });
+        $("#btnSearch").click(function () {
+            if (webform.check()){
+                bindData();
+            }
+        });
         $("#btnRemove").click(function () {
             $("#webform :input").not(":button, :submit, :reset, :hidden").val("").removeAttr("checked").remove("selected");
         });
-        load(bindData());
+        load(ld());
     });
     function load(fnCallBack) {
         ajaxPost("${ctx}/tassessor/userName", {}, function (d) {
@@ -79,17 +85,25 @@
             fnCallBack();
         });
     }
+    function ld() {
+
+    }
     function bindData() {
-        oTable = $("#datalist").dataTable({
-            "sAjaxSource": "${ctx}/tassessor/salaryInfo",
-            "columns": [
-                { "data": "LOGINNAME"},
-                { "data": null, "sClass": "text-c", "sWidth": "150px", "mRender": function (data, type, full) { return Profit(data); } },
-                { "data": "rev" ,"sWidth": "150px"},
-                { "data": null, "sClass": "text-c", "sWidth": "150px", "mRender": function (data, type, full) { return GAIN(data); } },
-                { "data": null, "sClass": "text-c", "sWidth": "100px", "mRender": function (data, type, full) { return Btns(data); } }
-            ]
-        });
+        if (oTable){
+            oTable.fnDraw();
+        }else {
+            oTable = $("#datalist").dataTable({
+                "sAjaxSource": "${ctx}/tassessor/salaryInfo",
+                "columns": [
+                    { "data": "LOGINNAME"},
+                    { "data": null, "sClass": "text-c", "sWidth": "150px", "mRender": function (data, type, full) { return Profit(data); } },
+                    { "data": "rev" ,"sWidth": "150px"},
+                    { "data": null, "sClass": "text-c", "sWidth": "150px", "mRender": function (data, type, full) { return GAIN(data); } },
+                    { "data": null, "sClass": "text-c", "sWidth": "100px", "mRender": function (data, type, full) { return Btns(data); } }
+                ]
+            });
+        }
+
     }
     function Btns(data) {
         var userid=data.assessorId;
