@@ -83,7 +83,7 @@
     }
     function delAsk(ROLEID, ROLENAME) {
         layer.confirm("确认删除[" + ROLENAME + "]吗？", function () {
-            ajaxPost("${ctx}/trole/AppRoleDelete", { ROLEID: ROLEID }, function (d) {
+            ajaxPost("${ctx}/trole/AppRoleDelete", { ROLEID: ROLEID.toString() }, function (d) {
                 if (d.code > -1) {
                     layer.msg("删除成功", { time: 300 }, function () {
                         oTable.fnDraw();
