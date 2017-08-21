@@ -46,7 +46,7 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();
 		sqlForm+=sql;
-		Page<Record> recordPage = Pagination.JPaginate(params,"select a.*,b.LOGINNAME,"+uid+" as UID",sqlForm,pars);
+		Page<Record> recordPage = Pagination.JPaginate(params,"select a.*,b.LOGINNAME,"+uid+" as UID",sqlForm+" order by a.borrowdate desc",pars);
 		retMap = Pager.PageMap(params,recordPage);
 		return retMap;
 	}
@@ -64,7 +64,7 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();
 		sqlForm+=sql;
-		Page<Record> recordPage = Pagination.JPaginate(params,"select a.*,b.LOGINNAME,"+uid+" as UID",sqlForm,pars);
+		Page<Record> recordPage = Pagination.JPaginate(params,"select a.*,b.LOGINNAME,"+uid+" as UID",sqlForm+" order by a.borrowdate desc",pars);
 		Map<String,Object> retMap = Pager.PageMap(params,recordPage);
 		return retMap;
 	}
@@ -173,7 +173,7 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		String sql = sqlBuilder.build();
 		Object[] pars = sqlBuilder.paras();
 		sqlForm+=sql;
-		Page<Record> page = Pagination.JPaginate(params,"select a.*,b.LOGINNAME",sqlForm,pars);
+		Page<Record> page = Pagination.JPaginate(params,"select a.*,b.LOGINNAME",sqlForm+" order by a.borrowdate desc",pars);
 		Map<String,Object> retMap = Pager.PageMap(params,page);
 		return retMap;
 	}

@@ -23,7 +23,7 @@
             </div>
             <label class="form-label col-xs-2">身份证号：</label>
             <div class="formControls col-xs-3">
-                <input type="text" id="txtcard" name="card" class="input-text" />
+                <input type="text" id="txtcard" name="card" datatype="*" nullmsg="必须填写身份证号！" class="input-text" />
             </div>
             <div class="form-label col-xs-2">
                 <button id="btnCheck" class="btn btn-primary-outline radius" type="button"><i class="Hui-iconfont">&#xe632;</i>
@@ -38,7 +38,7 @@
             </div>
             <label class="form-label col-xs-2">平台：</label>
             <div class="formControls col-xs-3">
-                <input type="text" id="txtplatform" name="platform" class="input-text" />
+                <input type="text" id="txtplatform" name="platform" class="input-text" datatype="*" nullmsg="必须填写平台！" />
             </div>
         </div>
         <div class="row cl border-tg">
@@ -50,17 +50,17 @@
         <div class="row cl border-tg">
             <label class="form-label col-xs-2"> QQ号：</label>
             <div class="formControls col-xs-3">
-                <input type="text" id="txtqq" name="qq" class="input-text" />
+                <input type="text" id="txtqq" name="qq" datatype="*" nullmsg="必须填写qq！" class="input-text"  />
             </div>
             <label class="form-label col-xs-2">微信号：</label>
             <div class="formControls col-xs-3">
-                <input type="text" id="txtwebcart" name="webcart" class="input-text"/>
+                <input type="text" id="txtwebcart" name="webcart" datatype="*" nullmsg="必须填写微信号！" class="input-text"/>
             </div>
         </div>
         <div class="row cl border-tg">
             <label class="form-label col-xs-2"> 借款金额：</label>
             <div class="formControls col-xs-3">
-                <input type="text" id="txtborrowbalan" name="borrowbalan" class="input-text" />
+                <input type="text" id="txtborrowbalan" name="borrowbalan" datatype="*" nullmsg="必须填写借款金额！" class="input-text" />
             </div>
             <label class="form-label col-xs-2">借款日期：</label>
             <div class="formControls col-xs-3">
@@ -70,7 +70,7 @@
         <div class="row cl border-tg">
             <label class="form-label col-xs-2">还款金额：</label>
             <div class="formControls col-xs-3">
-                <input type="text" id="txtreplymoney" name="replymoney" class="input-text" />
+                <input type="text" id="txtreplymoney" name="replymoney" datatype="*" nullmsg="必须填写还款金额！" class="input-text" />
             </div>
             <label class="form-label col-xs-2">还款日期：</label>
             <div class="formControls col-xs-3">
@@ -80,11 +80,11 @@
         <div class="row cl border-tg">
             <label class="form-label col-xs-2">押金：</label>
             <div class="formControls col-xs-3">
-                <input type="text" id="txtdeposit" name="deposit" class="input-text" />
+                <input type="text" id="txtdeposit" name="deposit" datatype="*" nullmsg="必须填写押金！" class="input-text" />
             </div>
             <label class="form-label col-xs-2">中介：</label>
             <div class="formControls col-xs-3">
-                <input type="text" id="txtagency" name="agency" class="input-text" />
+                <input type="text" id="txtagency" name="agency" datatype="*" nullmsg="必须填写中介！" class="input-text" />
             </div>
         </div>
         <div class="row cl border-tg">
