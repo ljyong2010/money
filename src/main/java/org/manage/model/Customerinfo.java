@@ -228,15 +228,9 @@ public class Customerinfo extends BaseCustomerinfo<Customerinfo> {
 		Map<String,Object> retMap = Pager.PageMap(params,page);
 		return retMap;
 	}
-	public Map<String,Object> zTotal(Map<String,String> params,APPUSER appuser){
-		int uid = appuser.getUSERTYPEID();
+	public Map<String,Object> zTotal(Map<String,String> params){
 		String sqlForm = "from customerinfo where flag=0";
 		SqlBuilder sqlBuilder = new SqlBuilder(null);
-		if (uid == 2){
-			sqlBuilder.addCondition("assessorId", SqlBuilder.Condition.EQ,params.get("assessorId"));
-		}else {
-			sqlBuilder.addCondition("assessorId", SqlBuilder.Condition.EQ,appuser.getUSERID());
-		}
 		sqlBuilder.addCondition("borrowdate", SqlBuilder.Condition.GE,params.get("startDate"));
 		sqlBuilder.addCondition("borrowdate", SqlBuilder.Condition.LE,params.get("endDate"));
 		String sql = sqlBuilder.build();

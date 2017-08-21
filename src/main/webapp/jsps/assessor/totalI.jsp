@@ -15,7 +15,6 @@
     <link href="${ctx}/include/Scripts/H-ui/skin/default/skin.css" rel="stylesheet" />
     <link href="${ctx}/include/Scripts/H-ui/css/style.css" rel="stylesheet" />
 </head>
-
 <body>
 <div class="btn-primary change"  align="center" >
     <span id="btnChange" style="cursor:pointer;" >高级搜索 <i class="Hui-iconfont"></i></span>
@@ -23,12 +22,6 @@
 <div class="pd-20">
     <div id="search" class="text-c pd">
         <form id="webform">
-            <%int typeid = ((APPUSER)session.getAttribute("Appuser")).getUSERTYPEID();
-                if (typeid == 2){%>
-            <select id="sassessorId" name="assessorId" class="select-box" style="width: 150px"></select>
-            <%}else {%>
-            <select id="sassessorId" name="assessorId" class="select-box" style="width: 150px" disabled="disabled"></select>
-            <%}%>
             &nbsp;&nbsp;开始日期：<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" onclick="laydate()" datatype="*" nullmsg="必须填写开始日期！" id="txtstartDate" name="startDate" />
             -&nbsp;<input type="text" class="input-text" style="width: 90px" placeholder="请输入日期" onclick="laydate()" datatype="*" nullmsg="必须填写结束日期！" id="txtendDate" name="endDate" />
             &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary radius" id="btnSearch"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
@@ -40,19 +33,17 @@
         <table id="datalist" class="table table-border table-bordered table-bg table-hover mt-5"style="width: 100%;">
             <thead>
             <tr>
-                <th>审核员</th>
-                <th>放款总额(元)</th>
-                <th>回款总额(元)</th>
-                <th>毛利(元)</th>
-                <th>审核费</th>
-                <th>逾期总额(元)</th>
-                <th>纯利(元)</th>
+                <th>全部放款总额(元)</th>
+                <th>全部回款总额(元)</th>
+                <th>全部毛利(元)</th>
+                <th>全部审核费</th>
+                <th>全部逾期总额(元)</th>
+                <th>全部纯利(元)</th>
             </tr>
             </thead>
         </table>
     </div>
 </div>
-
 <script src="${ctx}/include/Scripts/jquery-1.7.2.min.js"></script>
 <script src="${ctx}/include/Scripts/H-ui/lib/layer/layer.js"></script>
 <script src="${ctx}/include/Scripts/H-ui/lib/My97DatePicker/WdatePicker.js"></script>
@@ -76,40 +67,18 @@
         $("#btnRemove").click(function () {
             $("#webform :input").not(":button, :submit, :reset, :hidden").val("").removeAttr("checked").remove("selected");
         });
-        load(ld());
     });
-    function load(fnCallBack) {
-        ajaxPost("${ctx}/tassessor/userName", {}, function (d) {
-            $('<option value="">选择审核员</option>').appendTo($("#sassessorId"));
-            $.each(d.data, function (i, v) {
-                $('<option value="' + v.USERID + '">' + v.LOGINNAME + '</option>').appendTo($("#sassessorId"));
-            });
-            fnCallBack();
-        });
-    }
-    function load1(fnCallBack) {
-        ajaxPost("${ctx}/tassessor/userName1", {}, function (d) {
-            $('<option value="">选择审核员</option>').appendTo($("#sassessorId1"));
-            $.each(d.data, function (i, v) {
-                $('<option value="' + v.USERID + '">' + v.LOGINNAME + '</option>').appendTo($("#sassessorId1"));
-            });
-            fnCallBack();
-        });
-    }
-    function ld() {
-    }
     function bindData() {
         if (oTable){
             oTable.fnDraw();
         }else {
             oTable = $("#datalist").dataTable({
-                "sAjaxSource": "${ctx}/tassessor/totalInfo",
-                "columns": [
-                    { "data": "LOGINNAME"},
-                    { "data": "BOR"},
-                    { "data": "ACU"},
+                "sAjaxSource":"${ctx}/tassessor/total",
+                "columns":[
+                    { "data": "ZBOR"},
+                    { "data": "ZACU"},
                     { "data": null, "sClass": "text-c", "sWidth": "150px", "mRender": function (data, type, full) { return Profit(data); } },
-                    { "data": "REV" ,"sWidth": "150px"},
+                    { "data": "ZREV" ,"sWidth": "150px"},
                     { "data": null, "sClass": "text-c", "sWidth": "150px", "mRender": function (data, type, full) { return Yq(data); } },
                     { "data": null, "sClass": "text-c", "sWidth": "100px", "mRender": function (data, type, full) { return GAIN(data); } }
                 ]
@@ -118,18 +87,17 @@
 
     }
     function Profit(data) {
-        var a3=parseFloat(data.ACU)- parseFloat(data.BOR);
+        var a3=parseFloat(data.ZACU)- parseFloat(data.ZBOR);
         return a3.toFixed(2);
     }
     function Yq(data) {
-        var a1=parseFloat(data.REP)-parseFloat(data.ACU);
+        var a1=parseFloat(data.ZREP)-parseFloat(data.ZACU);
         return a1.toFixed(2);
     }
     function GAIN(data) {
-        var a3=parseFloat(data.ACU)- parseFloat(data.BOR)-data.REV;
+        var a3=parseFloat(data.ZACU)- parseFloat(data.ZBOR)-data.ZREV;
         return a3.toFixed(2);
     }
 </script>
 </body>
 </html>
-

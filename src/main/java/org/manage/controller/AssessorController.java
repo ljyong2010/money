@@ -55,9 +55,9 @@ public class AssessorController extends Controller {
         renderJson(retMap);
     }
     public void total(){
-        APPUSER appuser = getSessionAttr("Appuser");
+        /*APPUSER appuser = getSessionAttr("Appuser");*/
         Map<String,String> paramsHash = JsonUtil.jsonNameToMap(this.getRequest());
-        Map<String,Object> retMap = Customerinfo.dao.zTotal(paramsHash,appuser);
+        Map<String,Object> retMap = Customerinfo.dao.zTotal(paramsHash);
         renderJson(retMap);
     }
 }
