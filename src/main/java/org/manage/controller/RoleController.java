@@ -1,7 +1,6 @@
 package org.manage.controller;
 
 import com.jfinal.core.Controller;
-import com.jfinal.plugin.activerecord.Page;
 import org.manage.model.APPMENU;
 import org.manage.model.APPROLE;
 import org.manage.model.ApproleMenu;
@@ -28,8 +27,11 @@ public class RoleController extends Controller {
         renderJson(retMap);
     }
     public void AppRoleDelete(){
-        Map<String,String> paramMap=JsonUtil.jsonToMap(this.getRequest());
-        String roleID=paramMap.get("ROLEID");
+        Map<String,String> paramMap=JsonUtil.jToMap(this.getRequest());
+        String roleID = null;
+        if (paramMap.containsKey("ROLEID")){
+            roleID=paramMap.get("ROLEID");
+        }
         Map<String,Object> retMap=APPROLE.dao.roleDelete(roleID);
         renderJson(retMap);
     }

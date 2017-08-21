@@ -99,16 +99,6 @@
             });
         });
     });
-    function changecolor(color) {
-        document.getElementById("header").style.backgroundColor=color;
-        document.getElementById("menu").style.backgroundColor=color;
-        document.getElementById("menu").style.borderColor=color;
-        /*var tags = document.body.getElementsByTagName ('*');所有标签
-         for ( var i = 0; i < tags.length; i++)
-         {
-         tags[i].style.backgroundColor=color;
-         }*/
-    }
 </script>
 <script src="${ctx}/include/Scripts/index.js"></script>
 </body>

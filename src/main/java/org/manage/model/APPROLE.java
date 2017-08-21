@@ -1,6 +1,7 @@
 package org.manage.model;
 
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.IAtom;
 import com.jfinal.plugin.activerecord.Page;
 import org.manage.model.base.BaseAPPROLE;
 import org.manage.util.Pager;
@@ -8,6 +9,7 @@ import org.manage.util.Pagination;
 import org.manage.util.SqlBuilder;
 import org.manage.util.Strings;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,8 +42,28 @@ public class APPROLE extends BaseAPPROLE<APPROLE> {
 	}
 	public Map<String, Object> roleDelete(String roleID) {
 		Map<String, Object> retMap = new HashMap<String, Object>();
-		this.deleteById(Integer.parseInt(roleID));
-		retMap.put("code", 1);
+		int rId=Integer.parseInt(roleID);
+		boolean success = Db.tx(new IAtom() {
+			@Override
+			public boolean run() throws SQLException {
+				try {
+					Db.update("delete from APPROLE where ROLEID=?",rId);
+					Db.update("delete from APPROLE_MENU where ROLEID=?",rId);
+					Db.update("delete from APPUSER_ROLE where ROLEID=?",rId);
+
+				}catch (Exception e){
+					e.printStackTrace();
+					return false;
+				}
+				return true;
+			}
+		});
+		if (success){
+			retMap.put("code", 1);
+		}else {
+			retMap.put("code",-1);
+		}
+
 		return retMap;
 	}
 	public APPROLE getRole(String roleID) {
