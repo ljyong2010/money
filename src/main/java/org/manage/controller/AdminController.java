@@ -70,7 +70,9 @@ public class AdminController extends Controller {
         renderJson(retMap);
     }
     public void UserSave(){
-
+        Map<String,String> params = JsonUtil.jsonNameToMap(this.getRequest());
+        Map<String,Object> retMap = new HashMap<>();
+        renderJson(retMap);
     }
     public void GetUser(){
         Map<String,String> paramMap=JsonUtil.jToMap(this.getRequest());
